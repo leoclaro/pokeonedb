@@ -210,6 +210,42 @@
   margin: 0;
 }
 
+.sales-page {
+  padding: 32px 0;
+}
+
+.sales-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.sales-header h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 2.2vw, 2.6rem);
+  color: #fff7ed;
+}
+
+.sales-description {
+  color: #d1d5db;
+  max-width: 760px;
+}
+
+.sales-grid {
+  width: 100%;
+  min-height: 320px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #0c1724;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.menu-link.active {
+  background: rgba(245, 158, 11, 0.25);
+  color: #fff;
+}
+
 .footer {
   margin-top: 28px;
   padding: 20px 0 8px;
