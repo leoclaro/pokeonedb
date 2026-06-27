@@ -16,7 +16,6 @@ interface SaleRecord {
   ability: string
   nature: string
   ivs: string
-  quantity: number
   shiny: boolean
   price: number
   status: string
@@ -29,7 +28,6 @@ const seedRowData: SaleRecord[] = [
     ability: 'Blaze',
     nature: 'Timid',
     ivs: '31/30/31/31/31/29',
-    quantity: 1,
     shiny: false,
     price: 450,
     status: 'Disponível',
@@ -40,7 +38,6 @@ const seedRowData: SaleRecord[] = [
     ability: 'Levitate',
     nature: 'Timid',
     ivs: '31/31/30/31/31/31',
-    quantity: 2,
     shiny: true,
     price: 380,
     status: 'Vendido',
@@ -51,7 +48,6 @@ const seedRowData: SaleRecord[] = [
     ability: 'Trace',
     nature: 'Modest',
     ivs: '31/31/31/30/31/31',
-    quantity: 1,
     shiny: false,
     price: 500,
     status: 'Reservado',
@@ -62,7 +58,6 @@ const seedRowData: SaleRecord[] = [
     ability: 'Trace',
     nature: 'Modest',
     ivs: '31/31/31/30/31/31',
-    quantity: 1,
     shiny: true,
     price: 500,
     status: 'Disponível',
@@ -138,7 +133,6 @@ function PokemonSales() {
         headerTooltip: 'HP/ATK/DEF/SATK/SDEF/SPD',
         tooltipValueGetter: () => 'HP/ATK/DEF/SATK/SDEF/SPD',
       },
-      { field: 'quantity', headerName: 'Quantidade', width: 130, sortable: true, filter: 'agNumberColumnFilter' },
       { field: 'shiny', headerName: 'Shiny', width: 100, sortable: true, filter: true, valueFormatter: ({ value }) => (value ? 'Sim' : 'Não') },
       {
         field: 'price',
@@ -180,7 +174,7 @@ function PokemonSales() {
         </div>
       ) : null}
       {loading ? <p>Carregando vendas...</p> : <p className="sales-note">IV's = HP/ATK/DEF/SATK/SDEF/SPD</p>}
-      <div className="ag-theme-alpine sales-grid">
+      <div className="ag-theme-alpine sales-grid" style={{ padding: '1em' }}>
         <AgGridReact
           rowData={rowData}
           columnDefs={columnDefs}

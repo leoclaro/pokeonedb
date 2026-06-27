@@ -49,7 +49,6 @@ interface SaleRecord {
   ability: string
   nature: string
   ivs: string
-  quantity: number
   shiny: boolean
   price: number
   status: string
@@ -58,11 +57,20 @@ interface SaleRecord {
 const salesCollectionName = 'pokemonSales'
 const salesCollectionRef = collection(db, salesCollectionName)
 
+const STATUS_OPTIONS = ['Disponível', 'Reservado', 'Vendido'] as const
+const SHINY_OPTIONS = ['Não', 'Sim'] as const
+const NATURES = [
+  'Adamant', 'Bashful', 'Bold', 'Brave', 'Calm', 'Careful', 'Docile', 'Gentle', 'Hardy', 'Hasty',
+  'Impish', 'Jolly', 'Lax', 'Lonely', 'Mild', 'Modest', 'Naive', 'Naughty', 'Quiet', 'Quirky',
+  'Rash', 'Relaxed', 'Sassy', 'Serious', 'Timid',
+] as const
+
+
 const getSaleRowsFromSnapshot = (docs: any[]) =>
   docs.map((doc) => ({ id: doc.id, ...doc.data() })) as SaleRecord[]
 
 const parseEditableValue = (field: string, value: any) => {
-  if (field === 'level' || field === 'quantity' || field === 'price') {
+  if (field === 'level' || field === 'price') {
     return Number(value)
   }
 
@@ -88,7 +96,6 @@ function AdminSales() {
     ability: '',
     nature: '',
     ivs: '31/31/31/31/31/31',
-    quantity: 1,
     shiny: false,
     price: 0,
     status: 'Disponível',
@@ -184,7 +191,6 @@ function AdminSales() {
         ability: '',
         nature: '',
         ivs: '31/31/31/31/31/31',
-        quantity: 1,
         shiny: false,
         price: 0,
         status: 'Disponível',
@@ -212,6 +218,7 @@ function AdminSales() {
       // se nada selecionado, abrir edição da primeira linha (comodidade para testes)
       if (rowData && rowData.length > 0) {
         setEditingRow(rowData[0])
+        setShowAddForm(true)
         return
       }
       setError('Selecione uma linha para editar.')
@@ -223,6 +230,7 @@ function AdminSales() {
     }
 
     setEditingRow(selectedRows[0])
+    setShowAddForm(true)
   }
   
     const onEditingRowChange = (field: keyof SaleRecord, value: any) => {
@@ -239,6 +247,7 @@ function AdminSales() {
       // update local state immediately so UI reflects change even if network hiccup
       setRowData((prev) => prev.map((r) => (r.id === id ? ({ id, ...data } as SaleRecord) : r)))
       setEditingRow(null)
+      setShowAddForm(false)
       try {
         await fetchSales()
       } catch (e) {
@@ -253,6 +262,7 @@ function AdminSales() {
 
   const cancelEdit = () => {
     setEditingRow(null)
+    setShowAddForm(false)
   }
 
   const handleDeleteSelected = async () => {
@@ -323,15 +333,6 @@ function AdminSales() {
         tooltipValueGetter: () => 'HP/ATK/DEF/SATK/SDEF/SPD',
       },
       {
-        field: 'quantity',
-        headerName: 'Quantidade',
-        width: 130,
-        sortable: true,
-        filter: 'agNumberColumnFilter',
-        
-        valueParser: ({ newValue }) => Number(newValue),
-      },
-      {
         field: 'shiny',
         headerName: 'Shiny',
         width: 110,
@@ -380,73 +381,30 @@ function AdminSales() {
       ) : (
         <div className="admin-user-panel">
           <p>
-            Logado como <strong>{user?.email}</strong>
+            Logado como <strong>{user?.email}</strong>          
+            &nbsp;&nbsp;<button type="button" className="secondary-btn" onClick={handleSignOut}>
+                Sair
+            </button>
           </p>
-          <button type="button" className="secondary-btn" onClick={handleSignOut}>
-            Sair
-          </button>
         </div>
       )}
 
       {error ? (
         <div className="sales-error">
-          <p>{error}</p>
-          <button type="button" className="primary-btn" onClick={fetchSales}>
+          <p>{error}
+          &nbsp;&nbsp;<button type="button" className="primary-btn" onClick={fetchSales}>
             Tentar novamente
           </button>
+          </p>
         </div>
       ) : null}
 
       {user && (
         <>
-          {editingRow && (
-            <div className="edit-form">
-              <h3>Editar venda</h3>
-              <div>
-                <label>Pokemon</label>
-                <input value={editingRow.pokemon || ''} onChange={e => onEditingRowChange('pokemon', e.target.value)} />
-              </div>
-              <div>
-                <label>Shiny</label>
-                <select value={editingRow.shiny ? 'true' : 'false'} onChange={e => onEditingRowChange('shiny', e.target.value === 'true')}>
-                  <option value="false">false</option>
-                  <option value="true">true</option>
-                </select>
-              </div>
-              <div>
-                <label>Level</label>
-                <input type="number" value={editingRow.level ?? 1} onChange={e => onEditingRowChange('level', Number(e.target.value))} />
-              </div>
-              <div>
-                <label>Gender</label>
-                <input value={editingRow.gender || ''} onChange={e => onEditingRowChange('gender', e.target.value)} />
-              </div>
-              <div>
-                <label>Nature</label>
-                <input value={editingRow.nature || ''} onChange={e => onEditingRowChange('nature', e.target.value)} />
-              </div>
-              <div>
-                <label>Ability</label>
-                <input value={editingRow.ability || ''} onChange={e => onEditingRowChange('ability', e.target.value)} />
-              </div>
-              <div>
-                <label>IVs</label>
-                <input value={editingRow.ivs || ''} onChange={e => onEditingRowChange('ivs', e.target.value)} />
-              </div>
-              <div>
-                <label>Price</label>
-                <input type="number" value={editingRow.price ?? 0} onChange={e => onEditingRowChange('price', Number(e.target.value))} />
-              </div>
-              <div style={{ marginTop: 8 }}>
-                <button onClick={submitEdit}>Salvar edição</button>
-                <button onClick={cancelEdit}>Cancelar</button>
-              </div>
-            </div>
-          )}
           {loading ? (
             <p>Carregando vendas para edição...</p>
           ) : (
-            <div className="ag-theme-alpine sales-grid">
+            <div className="ag-theme-alpine sales-grid" style={{ padding: '1em' }}>
               <div className="admin-grid-actions" style={{ marginBottom: 8 }}>
                 {!showAddForm ? (
                   <>
@@ -462,21 +420,54 @@ function AdminSales() {
                   </>
                 ) : (
                   <div className="add-form" style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                    <input placeholder="Pokemon" value={newRow.pokemon} onChange={(e) => setNewRow({ ...newRow, pokemon: e.target.value })} />
-                    <input type="number" placeholder="Level" value={newRow.level} onChange={(e) => setNewRow({ ...newRow, level: Number(e.target.value) })} />
-                    <input placeholder="Ability" value={newRow.ability} onChange={(e) => setNewRow({ ...newRow, ability: e.target.value })} />
-                    <input placeholder="Nature" value={newRow.nature} onChange={(e) => setNewRow({ ...newRow, nature: e.target.value })} />
-                    <input placeholder="IVs (HP/ATK/DEF/SATK/SDEF/SPD)" value={newRow.ivs} onChange={(e) => setNewRow({ ...newRow, ivs: e.target.value })} />
-                    <input type="number" placeholder="Quantidade" value={newRow.quantity} onChange={(e) => setNewRow({ ...newRow, quantity: Number(e.target.value) })} />
-                    <label style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                      <input type="checkbox" checked={!!newRow.shiny} onChange={(e) => setNewRow({ ...newRow, shiny: e.target.checked })} /> Shiny
-                    </label>
-                    <input type="number" placeholder="Preço" value={newRow.price} onChange={(e) => setNewRow({ ...newRow, price: Number(e.target.value) })} />
-                    <input placeholder="Status" value={newRow.status} onChange={(e) => setNewRow({ ...newRow, status: e.target.value })} />
-                    <div style={{ display: 'flex', gap: 8 }}>
-                      <button type="button" className="primary-btn" onClick={submitAddNew}>Salvar</button>
-                      <button type="button" className="secondary-btn" onClick={cancelAddNew}>Cancelar</button>
-                    </div>
+                    {/* reuse same inputs for add and edit */}
+                    {(() => {
+                      const isEditing = !!editingRow
+                      const getFormValue = (field: keyof SaleRecord) => (isEditing ? (editingRow as any)[field] : (newRow as any)[field])
+                      const setFormValue = (field: keyof SaleRecord, value: any) => {
+                        if (isEditing) {
+                          setEditingRow((prev) => (prev ? ({ ...prev, [field]: value } as SaleRecord) : prev))
+                        } else {
+                          setNewRow((prev) => ({ ...prev, [field]: value }))
+                        }
+                      }
+
+                      return (
+                        <>
+                          <input placeholder="Pokemon" value={getFormValue('pokemon')} onChange={(e) => setFormValue('pokemon', e.target.value)} />
+                          <input type="number" placeholder="Level" value={getFormValue('level') as number} onChange={(e) => setFormValue('level', Number(e.target.value))} />
+                          <input placeholder="Ability" value={getFormValue('ability')} onChange={(e) => setFormValue('ability', e.target.value)} />
+                          <select value={getFormValue('nature') || ''} onChange={(e) => setFormValue('nature', e.target.value)}>
+                            <option value="">-- Nature --</option>
+                            {NATURES.map(n => (
+                              <option key={n} value={n}>{n}</option>
+                            ))}
+                          </select>
+                          <input placeholder="IVs (HP/ATK/DEF/SATK/SDEF/SPD)" value={getFormValue('ivs')} onChange={(e) => setFormValue('ivs', e.target.value)} />
+                          <select value={(getFormValue('shiny') ? 'Sim' : 'Não')} onChange={(e) => setFormValue('shiny', e.target.value === 'Sim')}>
+                            {SHINY_OPTIONS.map(s => <option key={s} value={s}>{s}</option>)}
+                          </select>
+                          <input type="number" placeholder="Preço" value={getFormValue('price') as number} onChange={(e) => setFormValue('price', Number(e.target.value))} />
+                          <select value={getFormValue('status') || ''} onChange={(e) => setFormValue('status', e.target.value)}>
+                            <option value="">-- Status --</option>
+                            {STATUS_OPTIONS.map(s => <option key={s} value={s}>{s}</option>)}
+                          </select>
+                          <div style={{ display: 'flex', gap: 8 }}>
+                            {isEditing ? (
+                              <>
+                                <button type="button" className="primary-btn" onClick={submitEdit}>Salvar edição</button>
+                                <button type="button" className="secondary-btn" onClick={cancelEdit}>Cancelar</button>
+                              </>
+                            ) : (
+                              <>
+                                <button type="button" className="primary-btn" onClick={submitAddNew}>Salvar</button>
+                                <button type="button" className="secondary-btn" onClick={cancelAddNew}>Cancelar</button>
+                              </>
+                            )}
+                          </div>
+                        </>
+                      )
+                    })()}
                   </div>
                 )}
               </div>
