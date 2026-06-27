@@ -77,27 +77,50 @@ const getSaleRowsFromSnapshot = (docs: any[]) =>
 
 function PokemonSales() {
   const [rowData, setRowData] = useState<SaleRecord[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    const fetchSales = async () => {
+  const seedSales = async () => {
+    try {
+      setLoading(true)
+      await Promise.all(
+        seedRowData.map((sale) =>
+          addDoc(salesCollectionRef, { ...sale, createdAt: serverTimestamp() })
+        )
+      )
+      const seededSnapshot = await getDocs(query(salesCollectionRef, orderBy('createdAt')))
+      setRowData(getSaleRowsFromSnapshot(seededSnapshot.docs))
+    } catch (err) {
+      setError('Falha ao criar os registros no Firestore.')
+      console.error(err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const fetchSales = async () => {
+    try {
+      setLoading(true)
+      setError(null)
       const salesQuery = query(salesCollectionRef, orderBy('createdAt'))
       const snapshot = await getDocs(salesQuery)
 
       if (snapshot.empty) {
-        await Promise.all(
-          seedRowData.map((sale) =>
-            addDoc(salesCollectionRef, { ...sale, createdAt: serverTimestamp() })
-          )
-        )
-        const seededSnapshot = await getDocs(salesQuery)
-        setRowData(getSaleRowsFromSnapshot(seededSnapshot.docs))
+        await seedSales()
         return
       }
 
       setRowData(getSaleRowsFromSnapshot(snapshot.docs))
+    } catch (err) {
+      setError('Falha ao carregar as vendas do Firestore.')
+      console.error(err)
+    } finally {
+      setLoading(false)
     }
+  }
 
-    fetchSales().catch(console.error)
+  useEffect(() => {
+    fetchSales()
   }, [])
 
   const columnDefs = useMemo<ColDef[]>(
@@ -148,7 +171,15 @@ function PokemonSales() {
           <h2>Minhas vendas de Pokémons listadas com AG Grid</h2>
         </div>
       </div>
-      <p className="sales-note">IV's = HP/ATK/DEF/SATK/SDEF/SPD</p>
+      {error ? (
+        <div className="sales-error">
+          <p>{error}</p>
+          <button type="button" onClick={fetchSales} className="primary-btn">
+            Tentar carregar novamente
+          </button>
+        </div>
+      ) : null}
+      {loading ? <p>Carregando vendas...</p> : <p className="sales-note">IV's = HP/ATK/DEF/SATK/SDEF/SPD</p>}
       <div className="ag-theme-alpine sales-grid">
         <AgGridReact
           rowData={rowData}
