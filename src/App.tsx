@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import logo from './assets/logo.fw.png'
 import PokemonSales from './PokemonSales'
+import AdminSales from './AdminSales'
 import './App.css'
 
 const menuItems = ['Principal', 'Guias', 'Vendas de Pokemons', 'Lives']
@@ -31,7 +32,15 @@ const socialLinks = ['YouTube', 'Twitch', 'Discord']
 
 function App() {
   const [selectedPage, setSelectedPage] = useState('Principal')
+  const [currentHash, setCurrentHash] = useState(window.location.hash)
   const isSalesPage = selectedPage === 'Vendas de Pokemons'
+  const isAdminPage = currentHash === '#admin'
+
+  useEffect(() => {
+    const handleHashChange = () => setCurrentHash(window.location.hash)
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
 
   return (
     <main className="app-shell">
@@ -56,7 +65,9 @@ function App() {
         </nav>
       </header>
 
-      {isSalesPage ? (
+      {isAdminPage ? (
+        <AdminSales />
+      ) : isSalesPage ? (
         <PokemonSales />
       ) : (
         <>
