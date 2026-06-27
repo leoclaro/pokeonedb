@@ -1,8 +1,11 @@
 import { useMemo, useState } from 'react'
 import { AgGridReact } from 'ag-grid-react'
+import { ModuleRegistry, ClientSideRowModelModule, RowStyleModule, NumberFilterModule, TextFilterModule, TooltipModule } from 'ag-grid-community'
 import type { ColDef } from 'ag-grid-community'
 import 'ag-grid-community/styles/ag-grid.css'
 import 'ag-grid-community/styles/ag-theme-alpine.css'
+
+ModuleRegistry.registerModules([ClientSideRowModelModule, RowStyleModule, NumberFilterModule, TextFilterModule, TooltipModule])
 
 interface SaleRecord {
   pokemon: string
@@ -10,7 +13,9 @@ interface SaleRecord {
   ability: string
   nature: string
   ivs: string
-  price: string
+  quantity: number
+  shiny: boolean
+  price: number
   status: string
 }
 
@@ -21,7 +26,9 @@ const defaultRowData: SaleRecord[] = [
     ability: 'Blaze',
     nature: 'Timid',
     ivs: '31/30/31/31/31/29',
-    price: 'R$ 450,00',
+    quantity: 1,
+    shiny: false,
+    price: 450,
     status: 'Disponível',
   },
   {
@@ -30,7 +37,9 @@ const defaultRowData: SaleRecord[] = [
     ability: 'Levitate',
     nature: 'Timid',
     ivs: '31/31/30/31/31/31',
-    price: 'R$ 380,00',
+    quantity: 2,
+    shiny: true,
+    price: 380,
     status: 'Vendido',
   },
   {
@@ -39,9 +48,22 @@ const defaultRowData: SaleRecord[] = [
     ability: 'Trace',
     nature: 'Modest',
     ivs: '31/31/31/30/31/31',
-    price: 'R$ 500,00',
+    quantity: 1,
+    shiny: false,
+    price: 500,
     status: 'Reservado',
   },
+  {
+    pokemon: 'Gardevoir',
+    level: 70,
+    ability: 'Trace',
+    nature: 'Modest',
+    ivs: '31/31/31/30/31/31',
+    quantity: 1,
+    shiny: true,
+    price: 500,
+    status: 'Disponível',
+  }
 ]
 
 function PokemonSales() {
@@ -53,8 +75,35 @@ function PokemonSales() {
       { field: 'level', headerName: 'Level', width: 110, sortable: true, filter: 'agNumberColumnFilter' },
       { field: 'ability', headerName: 'Ability', flex: 1, sortable: true, filter: true },
       { field: 'nature', headerName: 'Nature', flex: 1, sortable: true, filter: true },
-      { field: 'ivs', headerName: "IV's", flex: 1, sortable: true, filter: true },
-      { field: 'price', headerName: 'Preço', width: 140, sortable: true, filter: true },
+      {
+        field: 'ivs',
+        headerName: "IV's",
+        flex: 1,
+        sortable: true,
+        filter: true,
+        headerTooltip: 'HP/ATK/DEF/SATK/SDEF/SPD',
+        tooltipValueGetter: () => 'HP/ATK/DEF/SATK/SDEF/SPD',
+      },
+      { field: 'quantity', headerName: 'Quantidade', width: 130, sortable: true, filter: 'agNumberColumnFilter' },
+      { field: 'shiny', headerName: 'Shiny', width: 100, sortable: true, filter: true, valueFormatter: ({ value }) => (value ? 'Sim' : 'Não') },
+      {
+        field: 'price',
+        headerName: 'P. Dollars',
+        width: 140,
+        sortable: true,
+        filter: 'agNumberColumnFilter',
+        valueFormatter: ({ value }) => {
+          if (typeof value !== 'number') {
+            return value
+          }
+
+          if (value >= 1000) {
+            return `$ ${Math.round(value / 1000)}k`
+          }
+
+          return `$ ${value}`
+        },
+      },
       { field: 'status', headerName: 'Status atual', width: 150, sortable: true, filter: true },
     ],
     []
@@ -68,8 +117,20 @@ function PokemonSales() {
           <h2>Minhas vendas de Pokémons listadas com AG Grid</h2>
         </div>
       </div>
+      <p className="sales-note">IV's = HP/ATK/DEF/SATK/SDEF/SPD</p>
       <div className="ag-theme-alpine sales-grid">
-        <AgGridReact rowData={rowData} columnDefs={columnDefs} domLayout="autoHeight" />
+        <AgGridReact
+          rowData={rowData}
+          columnDefs={columnDefs}
+          domLayout="autoHeight"
+          enableBrowserTooltips={true}
+          tooltipShowDelay={0}
+          rowClassRules={{
+            'shiny-row': (params) => params.data?.shiny === true,
+            'sold-row': (params) => params.data?.status?.toLowerCase() === 'vendido',
+            'reserved-row': (params) => params.data?.status?.toLowerCase() === 'reservado',
+          }}
+        />
       </div>
     </section>
   )
