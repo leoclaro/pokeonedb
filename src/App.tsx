@@ -1,7 +1,7 @@
 import logo from './assets/logo.fw.png'
 import './App.css'
 
-const menuItems = ['Home', 'Pokedex', 'Guides', 'Multimedia', 'FAQ']
+const menuItems = ['Principal', 'Guias', 'Vendas', 'Lives']
 
 const latestNews = [
   {
@@ -115,7 +115,7 @@ function App() {
       </section>
 
       <footer className="footer">
-        <p>HOME • POKEDEX • GUIDES • MULTIMEDIA • FAQ</p>
+        <p>{menuItems.map((item) => (<span key={item}> • {item}</span>))} •</p>
         <p>© PokeOne Database</p>
       </footer>
     </main>
