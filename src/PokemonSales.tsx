@@ -1,13 +1,16 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { AgGridReact } from 'ag-grid-react'
 import { ModuleRegistry, ClientSideRowModelModule, RowStyleModule, NumberFilterModule, TextFilterModule, TooltipModule } from 'ag-grid-community'
+import { collection, query, orderBy, getDocs, addDoc, serverTimestamp } from 'firebase/firestore'
 import type { ColDef } from 'ag-grid-community'
 import 'ag-grid-community/styles/ag-grid.css'
 import 'ag-grid-community/styles/ag-theme-alpine.css'
+import { db } from './firebase'
 
 ModuleRegistry.registerModules([ClientSideRowModelModule, RowStyleModule, NumberFilterModule, TextFilterModule, TooltipModule])
 
 interface SaleRecord {
+  id?: string
   pokemon: string
   level: number
   ability: string
@@ -19,7 +22,7 @@ interface SaleRecord {
   status: string
 }
 
-const defaultRowData: SaleRecord[] = [
+const seedRowData: SaleRecord[] = [
   {
     pokemon: 'Charizard',
     level: 72,
@@ -63,11 +66,39 @@ const defaultRowData: SaleRecord[] = [
     shiny: true,
     price: 500,
     status: 'Disponível',
-  }
+  },
 ]
 
+const salesCollectionName = 'pokemonSales'
+const salesCollectionRef = collection(db, salesCollectionName)
+
+const getSaleRowsFromSnapshot = (docs: any[]) =>
+  docs.map((doc) => ({ id: doc.id, ...doc.data() })) as SaleRecord[]
+
 function PokemonSales() {
-  const [rowData] = useState(defaultRowData)
+  const [rowData, setRowData] = useState<SaleRecord[]>([])
+
+  useEffect(() => {
+    const fetchSales = async () => {
+      const salesQuery = query(salesCollectionRef, orderBy('createdAt'))
+      const snapshot = await getDocs(salesQuery)
+
+      if (snapshot.empty) {
+        await Promise.all(
+          seedRowData.map((sale) =>
+            addDoc(salesCollectionRef, { ...sale, createdAt: serverTimestamp() })
+          )
+        )
+        const seededSnapshot = await getDocs(salesQuery)
+        setRowData(getSaleRowsFromSnapshot(seededSnapshot.docs))
+        return
+      }
+
+      setRowData(getSaleRowsFromSnapshot(snapshot.docs))
+    }
+
+    fetchSales().catch(console.error)
+  }, [])
 
   const columnDefs = useMemo<ColDef[]>(
     () => [
