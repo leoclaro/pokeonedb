@@ -116,7 +116,7 @@ function App() {
 
       <footer className="footer">
         <p>{menuItems.map((item) => (<span key={item}> • {item}</span>))} •</p>
-        <p>© PokeOne Database</p>
+        <p>© PokeOne Database - pokeonedb.web.app</p>
       </footer>
     </main>
   )
