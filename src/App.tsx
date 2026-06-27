@@ -1,121 +1,124 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import logo from './assets/logo.fw.png'
 import './App.css'
 
+const menuItems = ['Home', 'Pokedex', 'Guides', 'Multimedia', 'FAQ']
+
+const latestNews = [
+  {
+    title: 'MAY 26′ SHINY HUNTER OF THE MONTH',
+    description:
+      'May 2026 Results Shiny Hunter Hall of Fame Incredible work, Trainers! The skill—and the shiny luck—you’ve shown in your recent hunts is absolutely next-level.',
+    date: '2026-06-16 21:21:28',
+  },
+  {
+    title: 'POKÉONE PREMIER LEAGUE',
+    description:
+      'Season 1 Launch 🏆 PokéOne Premier League The Inaugural Season Begins. Eight franchises will enter the league, build their rosters and compete for glory.',
+    date: '2026-06-03 22:47:19',
+  },
+  {
+    title: 'APRIL 26′ SHINY HUNTER OF THE MONTH',
+    description:
+      'April 2026 Results Shiny Hunter Hall of Fame Absolutely Legendary, Trainers! This month has been one for the history books.',
+    date: '2026-05-18 16:24:48',
+  },
+]
+
+const guides = ['Sevii Island Dailies', 'Kanto Dailies', 'General', 'Sevii Island Bosses']
+const socialLinks = ['YouTube', 'Twitch', 'Discord']
+
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <main className="app-shell">
+      <header className="topbar">
+        <div className="brand">
+          <img src={logo} alt="PokeOne Database" />
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
+        <nav className="menu" aria-label="Principal">
+          {menuItems.map((item) => (
+            <a key={item} href="#" className="menu-link">
+              {item}
+            </a>
+          ))}
+        </nav>
+      </header>
+
+      <section className="hero-section">
+        <div className="hero-copy">
+          <p className="eyebrow">POKÉONE ADVENTURE</p>
+          <h1>Quer ser o melhor de todos? Então temos uma aventura para você!</h1>
+          <p className="hero-text">
+            PokeOne é um MMO feito por fãs para fãs. Ele conta com as regiões Kanto, Johto, Unova e Destiny Island (uma espécie de mini Kalos), além das Ilhas Sevii e outros mapas customizados exclusivos. É o único MMO que permite batalhas em grupo de até 3 amigos contra inimigos — o que, na minha opinião, o torna o melhor MMO de Pokémon lançado até hoje. O jogo também conta com algumas Mega Evoluções, ataques Z e mais de 800 Pokémon capturáveis.
           </p>
+          <div className="hero-actions">
+            <a href="https://pokeonecommunity.com/multimedia/download/" className="primary-btn" target="_blank" >POKÉONE DOWNLOAD</a>
+            <a href="#guides" className="secondary-btn">CONFIRA MEUS GUIAS</a>
+          </div>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
+
+        <aside className="hero-panel">
+          <div className="panel-card">
+            <h2>POKÉONE</h2>
+            <p>DOWNLOAD</p>
+            <p>Forum</p>
+          </div>
+          <div className="panel-card alt">
+            <h2>CHECK OUT</h2>
+            <p>OUR GUIDES</p>
+            <p>PokeOne Download</p>
+          </div>
+          <div className="panel-card">
+            <h2>JOIN OUR</h2>
+            <p>DISCORD</p>
+          </div>
+        </aside>
       </section>
 
-      <div className="ticks"></div>
+      <section className="content-grid" id="guides">
+        <div className="main-column">
+          <h3 className="section-title">LATEST NEWS</h3>
+          <div className="news-list">
+            {latestNews.map((item) => (
+              <article key={item.title} className="news-card">
+                <h4>{item.title}</h4>
+                <p>{item.description}</p>
+                <span>{item.date}</span>
+              </article>
+            ))}
+          </div>
+        </div>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
+        <aside className="side-column">
+          <div className="side-block">
+            <h3 className="section-title">YOUTUBE STREAM</h3>
+            <p>Minhas transmissões de aventura, guias, e eventos.</p>
+          </div>
+
+          <div className="side-block">
+            <h3 className="section-title">RANDOM GUIDES</h3>
+            <ul>
+              {guides.map((guide) => (
+                <li key={guide}>{guide}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="side-block">
+            <h3 className="section-title">SOCIAL</h3>
+            <ul>
+              {socialLinks.map((link) => (
+                <li key={link}>{link}</li>
+              ))}
+            </ul>
+          </div>
+        </aside>
       </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+      <footer className="footer">
+        <p>HOME • POKEDEX • GUIDES • MULTIMEDIA • FAQ</p>
+        <p>© PokeOne Database</p>
+      </footer>
+    </main>
   )
 }
 
