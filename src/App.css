@@ -137,7 +137,7 @@
 .panel-card {
   padding: 20px;
   border-radius: 16px;
-  background: rgba(7, 25, 44, 0.84);
+  background: rgba(12, 12, 12, 0.88);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -181,7 +181,7 @@
 .side-block {
   padding: 18px 20px;
   border-radius: 16px;
-  background: rgba(7, 25, 44, 0.84);
+  background: rgba(12, 12, 12, 0.88);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -237,12 +237,12 @@
   min-height: 320px;
   border-radius: 20px;
   overflow: hidden;
-  background: #0c1724;
+  background: #090b10;
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .ag-theme-alpine .ag-row.shiny-row .ag-cell {
-  background-color: rgba(56, 189, 248, 0.18) !important;
+  background-color: rgba(20, 20, 20, 0.24) !important;
 }
 
 .ag-theme-alpine .ag-row.sold-row .ag-cell {

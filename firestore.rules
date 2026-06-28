@@ -4,5 +4,9 @@ service cloud.firestore {
     match /pokemonSales/{document=**} {
       allow read, write: if true;
     }
+
+    match /salesHistory/{document=**} {
+      allow read, write: if true;
+    }
   }
 }

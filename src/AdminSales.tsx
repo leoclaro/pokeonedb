@@ -56,6 +56,8 @@ interface SaleRecord {
 
 const salesCollectionName = 'pokemonSales'
 const salesCollectionRef = collection(db, salesCollectionName)
+const historyCollectionName = 'salesHistory'
+const historyCollectionRef = collection(db, historyCollectionName)
 
 const STATUS_OPTIONS = ['Disponível', 'Reservado', 'Vendido'] as const
 const SHINY_OPTIONS = ['Não', 'Sim'] as const
@@ -83,6 +85,18 @@ const parseEditableValue = (field: string, value: any) => {
   return value
 }
 
+const logHistory = async (title: string, description: string) => {
+  try {
+    await addDoc(historyCollectionRef, {
+      title,
+      description,
+      timestamp: serverTimestamp(),
+    })
+  } catch (err) {
+    console.error('Falha ao registrar histórico de vendas:', err)
+  }
+}
+
 function AdminSales() {
   const [user, setUser] = useState<User | null>(null)
   const [rowData, setRowData] = useState<SaleRecord[]>([])
@@ -100,6 +114,7 @@ function AdminSales() {
     price: 0,
     status: 'Disponível',
   })
+  const [editingOriginalStatus, setEditingOriginalStatus] = useState<string | null>(null)
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
@@ -184,6 +199,11 @@ function AdminSales() {
         createdAt: serverTimestamp(),
       })
 
+      await logHistory(
+        `Adicionado para venda: ${newRow.pokemon}`,
+        `Pokemon ${newRow.pokemon} adicionado com preço ${newRow.price} e status ${newRow.status}.`
+      )
+
       setShowAddForm(false)
       setNewRow({
         pokemon: '',
@@ -230,6 +250,7 @@ function AdminSales() {
     }
 
     setEditingRow(selectedRows[0])
+    setEditingOriginalStatus(String(selectedRows[0]?.status ?? ''))
     setShowAddForm(true)
   }
   
@@ -244,9 +265,18 @@ function AdminSales() {
     try {
       const { id, ...data } = editingRow
       await updateDoc(doc(db, salesCollectionName, id), data)
+
+      if (editingOriginalStatus !== 'Vendido' && data.status === 'Vendido') {
+        await logHistory(
+          `Pokémon vendido: ${editingRow.pokemon}`,
+          `O Pokémon ${editingRow.pokemon} foi marcado como vendido.`
+        )
+      }
+
       // update local state immediately so UI reflects change even if network hiccup
       setRowData((prev) => prev.map((r) => (r.id === id ? ({ id, ...data } as SaleRecord) : r)))
       setEditingRow(null)
+      setEditingOriginalStatus(null)
       setShowAddForm(false)
       try {
         await fetchSales()

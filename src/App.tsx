@@ -1,31 +1,19 @@
 import { useEffect, useState } from 'react'
+import { collection, query, orderBy, limit, onSnapshot } from 'firebase/firestore'
 import logo from './assets/logo.fw.png'
 import PokemonSales from './PokemonSales'
 import AdminSales from './AdminSales'
+import { db } from './firebase'
 import './App.css'
 
 const menuItems = ['Principal', 'Guias', 'Vendas de Pokemons', 'Lives']
 
-const latestNews = [
-  {
-    title: 'MAY 26′ SHINY HUNTER OF THE MONTH',
-    description:
-      'May 2026 Results Shiny Hunter Hall of Fame Incredible work, Trainers! The skill—and the shiny luck—you’ve shown in your recent hunts is absolutely next-level.',
-    date: '2026-06-16 21:21:28',
-  },
-  {
-    title: 'POKÉONE PREMIER LEAGUE',
-    description:
-      'Season 1 Launch 🏆 PokéOne Premier League The Inaugural Season Begins. Eight franchises will enter the league, build their rosters and compete for glory.',
-    date: '2026-06-03 22:47:19',
-  },
-  {
-    title: 'APRIL 26′ SHINY HUNTER OF THE MONTH',
-    description:
-      'April 2026 Results Shiny Hunter Hall of Fame Absolutely Legendary, Trainers! This month has been one for the history books.',
-    date: '2026-05-18 16:24:48',
-  },
-]
+interface HistoryRecord {
+  id?: string
+  title: string
+  description: string
+  date: string
+}
 
 const guides = ['Sevii Island Dailies', 'Kanto Dailies', 'General', 'Sevii Island Bosses']
 const socialLinks = ['YouTube', 'Twitch', 'Discord']
@@ -33,6 +21,7 @@ const socialLinks = ['YouTube', 'Twitch', 'Discord']
 function App() {
   const [selectedPage, setSelectedPage] = useState('Principal')
   const [currentHash, setCurrentHash] = useState(window.location.hash)
+  const [latestHistory, setLatestHistory] = useState<HistoryRecord[]>([])
   const isSalesPage = selectedPage === 'Vendas de Pokemons'
   const isAdminPage = currentHash === '#admin'
 
@@ -40,6 +29,32 @@ function App() {
     const handleHashChange = () => setCurrentHash(window.location.hash)
     window.addEventListener('hashchange', handleHashChange)
     return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
+
+  useEffect(() => {
+    const historyQuery = query(
+      collection(db, 'salesHistory'),
+      orderBy('timestamp', 'desc'),
+      limit(10)
+    )
+
+    const unsubscribe = onSnapshot(historyQuery, (snapshot) => {
+      const items = snapshot.docs.map((doc) => {
+        const data = doc.data() as any
+        const timestamp = data.timestamp
+        const date = timestamp?.toDate ? timestamp.toDate().toLocaleString('pt-BR') : ''
+
+        return {
+          id: doc.id,
+          title: data.title ?? '',
+          description: data.description ?? '',
+          date,
+        }
+      })
+      setLatestHistory(items)
+    })
+
+    return unsubscribe
   }, [])
 
   return (
@@ -104,15 +119,23 @@ function App() {
 
           <section className="content-grid" id="guides">
             <div className="main-column">
-              <h3 className="section-title">LATEST NEWS</h3>
+              <h3 className="section-title">ULTIMOS POKEMONS/ITENS ADICIONADOS PARA VENDAS</h3>
               <div className="news-list">
-                {latestNews.map((item) => (
-                  <article key={item.title} className="news-card">
-                    <h4>{item.title}</h4>
-                    <p>{item.description}</p>
-                    <span>{item.date}</span>
+                {latestHistory.length > 0 ? (
+                  latestHistory.map((item) => (
+                    <article key={item.id} className="news-card">
+                      <h4>{item.title}</h4>
+                      <p>{item.description}</p>
+                      <span>{item.date}</span>
+                    </article>
+                  ))
+                ) : (
+                  <article className="news-card">
+                    <h4>Sem histórico de vendas ainda</h4>
+                    <p>Adicione um Pokémon para venda ou marque um Pokémon como vendido para gerar registros.</p>
+                    <span>—</span>
                   </article>
-                ))}
+                )}
               </div>
             </div>
 
