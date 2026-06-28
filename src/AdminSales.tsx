@@ -468,7 +468,7 @@ function AdminSales() {
                     </button>
                   </>
                 ) : (
-                  <div className="add-form" style={{ display: 'flex', gap: 8, flexWrap: 'wrap', color: '#fff' }}>
+                  <div className="add-form">
                     {/* reuse same inputs for add and edit */}
                     {(() => {
                       const isEditing = !!editingRow
@@ -483,34 +483,34 @@ function AdminSales() {
 
                       return (
                         <>
-                          <label style={{ display: 'flex', flexDirection: 'column', gap: 4, color: '#fff' }}>
+                          <label className="admin-field">
                             <span>Pokemon</span>
-                            <input placeholder="Nome do Pokémon" value={getFormValue('pokemon')} onChange={(e) => setFormValue('pokemon', e.target.value)} style={{ color: '#fff', background: '#0b1220', border: '1px solid rgba(255,255,255,0.16)' }} />
+                            <input placeholder="Nome do Pokémon" value={getFormValue('pokemon')} onChange={(e) => setFormValue('pokemon', e.target.value)} />
                           </label>
-                          <label style={{ display: 'flex', flexDirection: 'column', gap: 4, color: '#fff' }}>
+                          <label className="admin-field">
                             <span>Level</span>
-                            <input type="number" placeholder="Ex: 72" value={getFormValue('level') as number} onChange={(e) => setFormValue('level', Number(e.target.value))} style={{ color: '#fff', background: '#0b1220', border: '1px solid rgba(255,255,255,0.16)' }} />
+                            <input type="number" placeholder="Ex: 72" value={getFormValue('level') as number} onChange={(e) => setFormValue('level', Number(e.target.value))} />
                           </label>
-                          <label style={{ display: 'flex', flexDirection: 'column', gap: 4, color: '#fff' }}>
+                          <label className="admin-field">
                             <span>Ability</span>
-                            <input placeholder="Habilidade" value={getFormValue('ability')} onChange={(e) => setFormValue('ability', e.target.value)} style={{ color: '#fff', background: '#0b1220', border: '1px solid rgba(255,255,255,0.16)' }} />
+                            <input placeholder="Habilidade" value={getFormValue('ability')} onChange={(e) => setFormValue('ability', e.target.value)} />
                           </label>
-                          <label style={{ display: 'flex', flexDirection: 'column', gap: 4, color: '#fff' }}>
+                          <label className="admin-field">
                             <span>Nature</span>
-                            <select value={getFormValue('nature') || ''} onChange={(e) => setFormValue('nature', e.target.value)} style={{ color: '#fff', background: '#0b1220', border: '1px solid rgba(255,255,255,0.16)' }}>
+                            <select value={getFormValue('nature') || ''} onChange={(e) => setFormValue('nature', e.target.value)}>
                               <option value="">-- Selecione a Nature --</option>
                               {NATURES.map(n => (
                                 <option key={n} value={n}>{n}</option>
                               ))}
                             </select>
                           </label>
-                          <fieldset style={{ border: '1px solid rgba(255,255,255,0.12)', borderRadius: 12, padding: 12, width: '100%' }}>
-                            <legend style={{ padding: '0 8px', fontSize: '0.9rem' }}>IVs</legend>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, minmax(60px, 1fr))', gap: '8px', width: '100%' }}>
+                          <fieldset className="admin-ivs-fieldset">
+                            <legend>IVs</legend>
+                            <div className="admin-ivs-row">
                               {IV_LABELS.map((label, index) => {
                                 const ivParts = getIvsParts(String(getFormValue('ivs') ?? ''))
                                 return (
-                                  <label key={label} style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: '0.8rem' }}>
+                                  <label key={label} className="admin-ivs-item">
                                     <span>{label}</span>
                                     <input
                                       type="number"
@@ -523,32 +523,31 @@ function AdminSales() {
                                         nextParts[index] = e.target.value
                                         setFormValue('ivs', mergeIvsParts(nextParts))
                                       }}
-                                      style={{ width: '100%' }}
                                     />
                                   </label>
                                 )
                               })}
                             </div>
-                            <div style={{ marginTop: 6, fontSize: '0.75rem', color: '#d1d5db' }}>Sera salvo como HP/ATK/DEF/SATK/SDEF/SPD</div>
+                            <div className="admin-note">Sera salvo como HP/ATK/DEF/SATK/SDEF/SPD</div>
                           </fieldset>
-                          <label style={{ display: 'flex', flexDirection: 'column', gap: 4, color: '#fff' }}>
+                          <label className="admin-field">
                             <span>Shiny</span>
-                            <select value={(getFormValue('shiny') ? 'Sim' : 'Não')} onChange={(e) => setFormValue('shiny', e.target.value === 'Sim')} style={{ color: '#fff', background: '#0b1220', border: '1px solid rgba(255,255,255,0.16)' }}>
+                            <select value={(getFormValue('shiny') ? 'Sim' : 'Não')} onChange={(e) => setFormValue('shiny', e.target.value === 'Sim')}>
                               {SHINY_OPTIONS.map(s => <option key={s} value={s}>{s}</option>)}
                             </select>
                           </label>
-                          <label style={{ display: 'flex', flexDirection: 'column', gap: 4, color: '#fff' }}>
+                          <label className="admin-field">
                             <span>Preço</span>
-                            <input type="number" placeholder="Ex: 450" value={getFormValue('price') as number} onChange={(e) => setFormValue('price', Number(e.target.value))} style={{ color: '#fff', background: '#0b1220', border: '1px solid rgba(255,255,255,0.16)' }} />
+                            <input type="number" placeholder="Ex: 450" value={getFormValue('price') as number} onChange={(e) => setFormValue('price', Number(e.target.value))} />
                           </label>
-                          <label style={{ display: 'flex', flexDirection: 'column', gap: 4, color: '#fff' }}>
+                          <label className="admin-field">
                             <span>Status</span>
-                            <select value={getFormValue('status') || ''} onChange={(e) => setFormValue('status', e.target.value)} style={{ color: '#fff', background: '#0b1220', border: '1px solid rgba(255,255,255,0.16)' }}>
+                            <select value={getFormValue('status') || ''} onChange={(e) => setFormValue('status', e.target.value)}>
                               <option value="">-- Selecione o Status --</option>
                               {STATUS_OPTIONS.map(s => <option key={s} value={s}>{s}</option>)}
                             </select>
                           </label>
-                          <div style={{ display: 'flex', gap: 8 }}>
+                          <div className="admin-actions">
                             {isEditing ? (
                               <>
                                 <button type="button" className="primary-btn" onClick={submitEdit}>Salvar edição</button>
