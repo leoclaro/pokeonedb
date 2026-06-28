@@ -85,6 +85,22 @@ const parseEditableValue = (field: string, value: any) => {
   return value
 }
 
+const IV_LABELS = ['HP', 'ATK', 'DEF', 'SATK', 'SDEF', 'SPD'] as const
+
+const getIvsParts = (ivs: string) => {
+  const parts = ivs?.split('/').map((part) => part.trim()) ?? []
+  return [...parts, '0', '0', '0', '0', '0'].slice(0, 6)
+}
+
+const mergeIvsParts = (parts: string[]) =>
+  parts
+    .slice(0, 6)
+    .map((part) => {
+      const value = Number(part)
+      return Number.isNaN(value) ? '0' : String(value)
+    })
+    .join('/')
+
 const logHistory = async (title: string, description: string) => {
   try {
     await addDoc(historyCollectionRef, {
@@ -452,7 +468,7 @@ function AdminSales() {
                     </button>
                   </>
                 ) : (
-                  <div className="add-form" style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                  <div className="add-form" style={{ display: 'flex', gap: 8, flexWrap: 'wrap', color: '#fff' }}>
                     {/* reuse same inputs for add and edit */}
                     {(() => {
                       const isEditing = !!editingRow
@@ -467,24 +483,71 @@ function AdminSales() {
 
                       return (
                         <>
-                          <input placeholder="Pokemon" value={getFormValue('pokemon')} onChange={(e) => setFormValue('pokemon', e.target.value)} />
-                          <input type="number" placeholder="Level" value={getFormValue('level') as number} onChange={(e) => setFormValue('level', Number(e.target.value))} />
-                          <input placeholder="Ability" value={getFormValue('ability')} onChange={(e) => setFormValue('ability', e.target.value)} />
-                          <select value={getFormValue('nature') || ''} onChange={(e) => setFormValue('nature', e.target.value)}>
-                            <option value="">-- Nature --</option>
-                            {NATURES.map(n => (
-                              <option key={n} value={n}>{n}</option>
-                            ))}
-                          </select>
-                          <input placeholder="IVs (HP/ATK/DEF/SATK/SDEF/SPD)" value={getFormValue('ivs')} onChange={(e) => setFormValue('ivs', e.target.value)} />
-                          <select value={(getFormValue('shiny') ? 'Sim' : 'Não')} onChange={(e) => setFormValue('shiny', e.target.value === 'Sim')}>
-                            {SHINY_OPTIONS.map(s => <option key={s} value={s}>{s}</option>)}
-                          </select>
-                          <input type="number" placeholder="Preço" value={getFormValue('price') as number} onChange={(e) => setFormValue('price', Number(e.target.value))} />
-                          <select value={getFormValue('status') || ''} onChange={(e) => setFormValue('status', e.target.value)}>
-                            <option value="">-- Status --</option>
-                            {STATUS_OPTIONS.map(s => <option key={s} value={s}>{s}</option>)}
-                          </select>
+                          <label style={{ display: 'flex', flexDirection: 'column', gap: 4, color: '#fff' }}>
+                            <span>Pokemon</span>
+                            <input placeholder="Nome do Pokémon" value={getFormValue('pokemon')} onChange={(e) => setFormValue('pokemon', e.target.value)} style={{ color: '#fff', background: '#0b1220', border: '1px solid rgba(255,255,255,0.16)' }} />
+                          </label>
+                          <label style={{ display: 'flex', flexDirection: 'column', gap: 4, color: '#fff' }}>
+                            <span>Level</span>
+                            <input type="number" placeholder="Ex: 72" value={getFormValue('level') as number} onChange={(e) => setFormValue('level', Number(e.target.value))} style={{ color: '#fff', background: '#0b1220', border: '1px solid rgba(255,255,255,0.16)' }} />
+                          </label>
+                          <label style={{ display: 'flex', flexDirection: 'column', gap: 4, color: '#fff' }}>
+                            <span>Ability</span>
+                            <input placeholder="Habilidade" value={getFormValue('ability')} onChange={(e) => setFormValue('ability', e.target.value)} style={{ color: '#fff', background: '#0b1220', border: '1px solid rgba(255,255,255,0.16)' }} />
+                          </label>
+                          <label style={{ display: 'flex', flexDirection: 'column', gap: 4, color: '#fff' }}>
+                            <span>Nature</span>
+                            <select value={getFormValue('nature') || ''} onChange={(e) => setFormValue('nature', e.target.value)} style={{ color: '#fff', background: '#0b1220', border: '1px solid rgba(255,255,255,0.16)' }}>
+                              <option value="">-- Selecione a Nature --</option>
+                              {NATURES.map(n => (
+                                <option key={n} value={n}>{n}</option>
+                              ))}
+                            </select>
+                          </label>
+                          <fieldset style={{ border: '1px solid rgba(255,255,255,0.12)', borderRadius: 12, padding: 12, width: '100%' }}>
+                            <legend style={{ padding: '0 8px', fontSize: '0.9rem' }}>IVs</legend>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, minmax(60px, 1fr))', gap: '8px', width: '100%' }}>
+                              {IV_LABELS.map((label, index) => {
+                                const ivParts = getIvsParts(String(getFormValue('ivs') ?? ''))
+                                return (
+                                  <label key={label} style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: '0.8rem' }}>
+                                    <span>{label}</span>
+                                    <input
+                                      type="number"
+                                      min="0"
+                                      max="31"
+                                      placeholder="0"
+                                      value={ivParts[index]}
+                                      onChange={(e) => {
+                                        const nextParts = [...ivParts]
+                                        nextParts[index] = e.target.value
+                                        setFormValue('ivs', mergeIvsParts(nextParts))
+                                      }}
+                                      style={{ width: '100%' }}
+                                    />
+                                  </label>
+                                )
+                              })}
+                            </div>
+                            <div style={{ marginTop: 6, fontSize: '0.75rem', color: '#d1d5db' }}>Sera salvo como HP/ATK/DEF/SATK/SDEF/SPD</div>
+                          </fieldset>
+                          <label style={{ display: 'flex', flexDirection: 'column', gap: 4, color: '#fff' }}>
+                            <span>Shiny</span>
+                            <select value={(getFormValue('shiny') ? 'Sim' : 'Não')} onChange={(e) => setFormValue('shiny', e.target.value === 'Sim')} style={{ color: '#fff', background: '#0b1220', border: '1px solid rgba(255,255,255,0.16)' }}>
+                              {SHINY_OPTIONS.map(s => <option key={s} value={s}>{s}</option>)}
+                            </select>
+                          </label>
+                          <label style={{ display: 'flex', flexDirection: 'column', gap: 4, color: '#fff' }}>
+                            <span>Preço</span>
+                            <input type="number" placeholder="Ex: 450" value={getFormValue('price') as number} onChange={(e) => setFormValue('price', Number(e.target.value))} style={{ color: '#fff', background: '#0b1220', border: '1px solid rgba(255,255,255,0.16)' }} />
+                          </label>
+                          <label style={{ display: 'flex', flexDirection: 'column', gap: 4, color: '#fff' }}>
+                            <span>Status</span>
+                            <select value={getFormValue('status') || ''} onChange={(e) => setFormValue('status', e.target.value)} style={{ color: '#fff', background: '#0b1220', border: '1px solid rgba(255,255,255,0.16)' }}>
+                              <option value="">-- Selecione o Status --</option>
+                              {STATUS_OPTIONS.map(s => <option key={s} value={s}>{s}</option>)}
+                            </select>
+                          </label>
                           <div style={{ display: 'flex', gap: 8 }}>
                             {isEditing ? (
                               <>
