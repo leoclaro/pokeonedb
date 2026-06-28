@@ -253,11 +253,6 @@ function AdminSales() {
     setEditingOriginalStatus(String(selectedRows[0]?.status ?? ''))
     setShowAddForm(true)
   }
-  
-    const onEditingRowChange = (field: keyof SaleRecord, value: any) => {
-      if (!editingRow) return
-      setEditingRow({ ...editingRow, [field]: value } as SaleRecord)
-    }
 
   const submitEdit = async () => {
     if (!editingRow?.id) return
