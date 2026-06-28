@@ -92,8 +92,10 @@ const logHistory = async (title: string, description: string) => {
       description,
       timestamp: serverTimestamp(),
     })
+    return true
   } catch (err) {
     console.error('Falha ao registrar histórico de vendas:', err)
+    return false
   }
 }
 
@@ -199,10 +201,13 @@ function AdminSales() {
         createdAt: serverTimestamp(),
       })
 
-      await logHistory(
+      const historyOk = await logHistory(
         `Adicionado para venda: ${newRow.pokemon}`,
         `Pokemon ${newRow.pokemon} adicionado com preço ${newRow.price} e status ${newRow.status}.`
       )
+      if (!historyOk) {
+        setError('A venda foi criada, mas falhou ao registrar o histórico de vendas.')
+      }
 
       setShowAddForm(false)
       setNewRow({
@@ -262,10 +267,13 @@ function AdminSales() {
       await updateDoc(doc(db, salesCollectionName, id), data)
 
       if (editingOriginalStatus !== 'Vendido' && data.status === 'Vendido') {
-        await logHistory(
+        const historyOk = await logHistory(
           `Pokémon vendido: ${editingRow.pokemon}`,
           `O Pokémon ${editingRow.pokemon} foi marcado como vendido.`
         )
+        if (!historyOk) {
+          setError('Status atualizado, mas falhou ao registrar no histórico de vendas.')
+        }
       }
 
       // update local state immediately so UI reflects change even if network hiccup
