@@ -56,9 +56,39 @@ function PokemonSales() {
     void fetchSales()
   }, [])
 
+  const getPokemonSpriteUrl = (pokemon: string) => {
+    const normalized = pokemon
+      .trim()
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/\p{Diacritic}/gu, '')
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+
+    return `https://img.pokemondb.net/sprites/scarlet-violet/icon/${normalized}.png`
+  }
+
   const columns = useMemo(
     () => [
-      { key: 'pokemon', name: 'Pokemon', sortable: true, resizable: true },
+      {
+        key: 'pokemon',
+        name: 'Pokemon',
+        sortable: true,
+        resizable: true,
+        renderCell: ({ row }: { row: SaleRecord }) => (
+          <div className="pokemon-cell">
+            <img
+              src={getPokemonSpriteUrl(row.pokemon)}
+              alt={row.pokemon}
+              className="pokemon-cell-image"
+              onError={(event) => {
+                event.currentTarget.style.visibility = 'hidden'
+              }}
+            />
+            <span>{row.pokemon}</span>
+          </div>
+        ),
+      },
       { key: 'level', name: 'Level', sortable: true, resizable: true, width: 110 },
       { key: 'ability', name: 'Ability', sortable: true, resizable: true },
       { key: 'nature', name: 'Nature', sortable: true, resizable: true },
