@@ -31,8 +31,12 @@ function ItemSales() {
     void fetchSales()
   }, [])
 
-  const getItemSpriteUrl = (name: string) => {
-    const normalized = name
+  const getItemSpriteUrl = (item: ItemRecord) => {
+    const source = item.category?.trim().toUpperCase().startsWith('TM')
+      ? item.category
+      : item.name
+
+    const normalized = source
       .trim()
       .toLowerCase()
       .normalize('NFD')
@@ -53,7 +57,7 @@ function ItemSales() {
         renderCell: ({ row }: { row: ItemRecord }) => (
           <div className="item-cell">
             <img
-              src={getItemSpriteUrl(row.name)}
+              src={getItemSpriteUrl(row)}
               alt={row.name}
               className="item-cell-image"
               onError={(event) => {
