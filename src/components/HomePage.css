@@ -1,0 +1,149 @@
+.home-hero-section {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+  padding: 38px 0 28px;
+  align-items: start;
+}
+
+.home-hero-copy {
+  padding: 24px 0;
+  min-width: 0;
+}
+
+.home-eyebrow {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: #fde68a;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+.home-hero-text {
+  color: #d1d5db;
+  font-size: 1.02rem;
+  line-height: 1.75;
+  max-width: 100%;
+  margin-bottom: 22px;
+}
+
+.home-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.home-primary-btn,
+.home-secondary-btn {
+  display: inline-block;
+  padding: 12px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.home-primary-btn {
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  color: #fff;
+}
+
+.home-secondary-btn {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8fafc;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.home-hero-panel {
+  display: grid;
+  gap: 12px;
+}
+
+.home-panel-card {
+  padding: 20px;
+  border-radius: 16px;
+  background: rgba(12, 12, 12, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.home-panel-card-alt {
+  background: rgba(245, 158, 11, 0.18);
+}
+
+.home-panel-card h2 {
+  margin: 0 0 8px;
+  color: #fff7ed;
+  font-size: 1.1rem;
+}
+
+.home-panel-card p {
+  margin: 0;
+  color: #e5e7eb;
+}
+
+.home-content-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 0.9fr;
+  gap: 24px;
+  margin-top: 12px;
+}
+
+.home-main-column,
+.home-side-column {
+  display: grid;
+  gap: 16px;
+}
+
+.home-section-title {
+  margin: 0 0 10px;
+  font-size: 1rem;
+  letter-spacing: 0.16em;
+  color: #fde68a;
+  text-transform: uppercase;
+}
+
+.home-news-card,
+.home-side-block {
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: rgba(12, 12, 12, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.home-news-card h4 {
+  margin: 0 0 10px;
+  color: #fff7ed;
+  font-size: 1.05rem;
+}
+
+.home-news-card p,
+.home-side-block p,
+.home-side-block li {
+  color: #d1d5db;
+  line-height: 1.7;
+}
+
+.home-news-card span {
+  display: inline-block;
+  margin-top: 8px;
+  color: #f59e0b;
+  font-size: 0.9rem;
+}
+
+.home-side-block ul {
+  padding-left: 18px;
+  margin: 0;
+}
+
+.home-footer {
+  margin-top: 28px;
+  color: #d1d5db;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.home-footer p {
+  margin: 0;
+}

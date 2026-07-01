@@ -1,0 +1,61 @@
+.admin-sale-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.admin-field {
+  display: grid;
+  gap: 8px;
+}
+
+.admin-field span {
+  color: #fde68a;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+.admin-field input,
+.admin-field select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: #f8fafc;
+}
+
+.admin-ivs-fieldset {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.admin-ivs-fieldset legend {
+  color: #fde68a;
+  font-weight: 700;
+}
+
+.admin-ivs-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.admin-ivs-item {
+  display: grid;
+  gap: 8px;
+}
+
+.admin-note {
+  margin-top: 14px;
+  color: #9ca3af;
+  font-size: 0.95rem;
+}
+
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}

@@ -1,0 +1,55 @@
+.sales-page {
+  padding: 32px 0;
+}
+
+.sales-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.sales-header h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 2.2vw, 2.6rem);
+  color: #fff7ed;
+}
+
+.sales-note {
+  color: #d1d5db;
+  margin-bottom: 18px;
+}
+
+.sales-error {
+  margin: 16px 0;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(46, 54, 69, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sales-error p {
+  margin: 0;
+  color: #fde68a;
+}
+
+.sales-grid {
+  width: 100%;
+  min-height: 320px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #121316;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sold-row {
+  background: rgba(248, 113, 113, 0.08);
+}
+
+.reserved-row {
+  background: rgba(252, 211, 77, 0.1);
+}
+
+.shiny-row {
+  font-weight: 700;
+}
