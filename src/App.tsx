@@ -3,7 +3,9 @@ import { collection, limit, onSnapshot, orderBy, query } from 'firebase/firestor
 import { Routes, Route } from 'react-router-dom'
 import logo from './assets/logo.fw.png'
 import PokemonSales from './pages/PokemonSales'
+import ItemSales from './pages/ItemSales'
 import AdminSales from './pages/AdminSales'
+import AdminItemSales from './pages/AdminItemSales'
 import GuidesPage from './pages/GuidesPage'
 import GuideDetail from './pages/GuideDetail'
 import LivePage from './pages/LivePage'
@@ -63,8 +65,10 @@ function App() {
         <Route path="/guides" element={<GuidesPage />} />
         <Route path="/guides/:slug" element={<GuideDetail />} />
         <Route path="/sales" element={<PokemonSales />} />
+        <Route path="/items" element={<ItemSales />} />
         <Route path="/lives" element={<LivePage />} />
         <Route path="/admin" element={<AdminSales />} />
+        <Route path="/admin-items" element={<AdminItemSales />} />
       </Routes>
     </main>
   )

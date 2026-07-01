@@ -1,31 +1,30 @@
 import { DataGrid, type Column } from 'react-data-grid'
-import type { SaleRecord } from '../types'
 
-interface SalesDataGridProps {
-  rows: SaleRecord[]
-  columns: readonly Column<SaleRecord>[]
-  rowKeyGetter: (row: SaleRecord) => string
-  rowClass?: (row: SaleRecord) => string | undefined
-  selectedRows?: ReadonlySet<string>
-  onSelectedRowsChange?: (nextSelectedRows: ReadonlySet<string>) => void
+interface SalesDataGridProps<T, K extends React.Key = string> {
+  rows: T[]
+  columns: readonly Column<T>[]
+  rowKeyGetter: (row: T) => K
+  rowClass?: (row: T) => string | undefined
+  selectedRows?: ReadonlySet<K>
+  onSelectedRowsChange?: (nextSelectedRows: Set<K>) => void
 }
 
-function SalesDataGrid({
+function SalesDataGrid<T, K extends React.Key = string>({
   rows,
   columns,
   rowKeyGetter,
   rowClass,
   selectedRows,
   onSelectedRowsChange,
-}: SalesDataGridProps) {
+}: SalesDataGridProps<T, K>) {
   return (
-    <DataGrid
+    <DataGrid<T, unknown, K>
       rows={rows}
       columns={columns}
       rowKeyGetter={rowKeyGetter}
       rowClass={rowClass}
-      selectedRows={selectedRows}
-      onSelectedRowsChange={onSelectedRowsChange}
+      selectedRows={selectedRows as any}
+      onSelectedRowsChange={onSelectedRowsChange as any}
       defaultColumnOptions={{ resizable: true, sortable: true }}
       style={{ minHeight: 400 }}
     />

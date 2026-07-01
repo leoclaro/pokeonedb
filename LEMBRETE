@@ -1,3 +1,16 @@
+Atualizar regras do Firestore pelo Firebase CLI
+
+firebase deploy --only firestore:rules
+
+
+
+add nova regra:
+match /itemSales/{document=**} {
+  allow read, write: if true;
+}
+
+
+exemplo como fica:
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {

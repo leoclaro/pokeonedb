@@ -3,11 +3,11 @@ import { SelectColumn, type Column } from 'react-data-grid'
 import { query, orderBy, getDocs, doc, updateDoc, addDoc, deleteDoc, serverTimestamp } from 'firebase/firestore'
 import { onAuthStateChanged, signInWithPopup, signInWithRedirect, signOut, type User } from 'firebase/auth'
 import { FirebaseError } from 'firebase/app'
-import { auth, googleProvider } from './firebase'
-import SalesDataGrid from './components/SalesDataGrid'
-import AdminSaleForm from './components/AdminSaleForm'
-import type { SaleRecord, SaleFormValues } from './types'
-import { salesCollectionRef, getSaleRowsFromSnapshot, formatPrice, logHistory } from './constants/sales'
+import { auth, googleProvider } from '../firebase'
+import SalesDataGrid from '../components/SalesDataGrid'
+import AdminSaleForm from '../components/AdminSaleForm'
+import type { SaleRecord, SaleFormValues } from '../types'
+import { salesCollectionRef, getSaleRowsFromSnapshot, formatPrice, logHistory } from '../constants/sales'
 import 'react-data-grid/lib/styles.css'
 
 const initialSaleForm: SaleFormValues = {
@@ -111,7 +111,7 @@ function AdminSales() {
 
   const setFormField = (field: keyof SaleFormValues, value: string | number | boolean) => {
     if (editingRow) {
-      setEditingRow((prev) => (prev ? ({ ...prev, [field]: value } as SaleRecord) : prev))
+      setEditingRow((prev: SaleRecord | null) => (prev ? ({ ...prev, [field]: value } as SaleRecord) : prev))
     } else {
       setNewRow((prev) => ({ ...prev, [field]: value }))
     }

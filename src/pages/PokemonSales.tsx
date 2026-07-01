@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
 import { query, orderBy, getDocs, addDoc, serverTimestamp } from 'firebase/firestore'
-import SalesDataGrid from './components/SalesDataGrid'
-import type { SaleRecord } from './types'
-import { salesCollectionRef, getSaleRowsFromSnapshot, seedRowData, formatPrice } from './constants/sales'
-import './components/PokemonSales.css'
+import SalesDataGrid from '../components/SalesDataGrid'
+import type { SaleRecord } from '../types'
+import { salesCollectionRef, getSaleRowsFromSnapshot, seedRowData, formatPrice } from '../constants/sales'
+import './PokemonSales.css'
 import 'react-data-grid/lib/styles.css'
 
 function PokemonSales() {
@@ -17,7 +17,7 @@ function PokemonSales() {
 
     try {
       await Promise.all(
-        seedRowData.map((sale) => addDoc(salesCollectionRef, { ...sale, createdAt: serverTimestamp() }))
+        seedRowData.map((sale: SaleRecord) => addDoc(salesCollectionRef, { ...sale, createdAt: serverTimestamp() }))
       )
 
       const seededSnapshot = await getDocs(query(salesCollectionRef, orderBy('createdAt')))

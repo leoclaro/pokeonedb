@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import type { HistoryRecord } from '../types'
-import { menuItems } from './NavBar'
+import { menuItems } from '../components/NavBar'
 import './HomePage.css'
 
 interface HomePageProps {

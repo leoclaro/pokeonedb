@@ -23,3 +23,14 @@ export interface SaleRecord {
 }
 
 export type SaleFormValues = Omit<SaleRecord, 'id'>
+
+export interface ItemRecord {
+  id?: string
+  name: string
+  category: string
+  status: string
+  price: number
+  createdAt?: string
+}
+
+export type ItemFormValues = Omit<ItemRecord, 'id' | 'createdAt'>

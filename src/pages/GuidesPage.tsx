@@ -1,4 +1,4 @@
-import GuideCard from './GuideCard'
+import GuideCard from '../components/GuideCard'
 import { guides } from '../data/guides'
 
 export default function GuidesPage() {

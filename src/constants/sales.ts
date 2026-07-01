@@ -1,10 +1,12 @@
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { db } from '../firebase'
-import type { SaleRecord } from '../types'
+import type { SaleRecord, ItemRecord } from '../types'
 
 export const salesCollectionName = 'pokemonSales'
+export const itemSalesCollectionName = 'itemSales'
 export const historyCollectionName = 'salesHistory'
 export const salesCollectionRef = collection(db, salesCollectionName)
+export const itemSalesCollectionRef = collection(db, itemSalesCollectionName)
 export const historyCollectionRef = collection(db, historyCollectionName)
 
 export const STATUS_OPTIONS = ['Disponível', 'Reservado', 'Vendido'] as const
@@ -61,6 +63,13 @@ export const seedRowData: SaleRecord[] = [
 
 export const getSaleRowsFromSnapshot = (docs: any[]) =>
   docs.map((doc) => ({ id: doc.id, ...doc.data() })) as SaleRecord[]
+
+export const getItemRowsFromSnapshot = (docs: any[]) =>
+  docs.map((doc) => {
+    const data = doc.data()
+    const createdAt = data.createdAt?.toDate ? data.createdAt.toDate().toLocaleString('pt-BR') : data.createdAt
+    return ({ id: doc.id, ...data, createdAt }) as ItemRecord
+  })
 
 export const getIvsParts = (ivs: string) => {
   const parts = ivs?.split('/').map((part) => part.trim()) ?? []
