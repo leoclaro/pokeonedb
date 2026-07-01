@@ -38,7 +38,7 @@ function HomePage({ latestHistory }: HomePageProps) {
             <p>DOWNLOAD</p>
             <p>Forum</p>
           </div>
-          <div className="home-panel-card home-panel-card-alt">
+          <div className="home-panel-card">
             <h2>CHECK OUT</h2>
             <p>OUR GUIDES</p>
             <p>PokeOne Download</p>
