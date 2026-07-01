@@ -120,6 +120,10 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.home-news-card {
+  margin-bottom: 16px;
+}
+
 .home-news-card h4 {
   margin: 0 0 10px;
   color: #fff7ed;
