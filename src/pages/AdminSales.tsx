@@ -127,7 +127,7 @@ function AdminSales() {
 
       const historyOk = await logHistory(
         `Adicionado para venda: ${newRow.pokemon}`,
-        `Pokemon ${newRow.pokemon} adicionado com preço ${newRow.price} e status ${newRow.status}.`
+        `Pokemon ${newRow.pokemon} adicionado com preço ${formatPrice(newRow.price)} e status ${newRow.status}.`
       )
       if (!historyOk) {
         setError('A venda foi criada, mas falhou ao registrar o histórico de vendas.')

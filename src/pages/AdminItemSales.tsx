@@ -119,7 +119,7 @@ function AdminItemSales() {
 
       const historyOk = await logHistory(
         `Adicionado item: ${formValues.name}`,
-        `Item ${formValues.name} adicionado na coleção itemSales com preço ${formValues.price} e status ${formValues.status}.`
+        `Item ${formValues.name} adicionado na coleção itemSales com preço ${formatPrice(formValues.price)} e status ${formValues.status}.`
       )
       if (!historyOk) setError('Item adicionado, mas falha ao registrar histórico de vendas.')
 
