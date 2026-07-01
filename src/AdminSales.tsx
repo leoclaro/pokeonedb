@@ -1,14 +1,5 @@
-import { useEffect, useMemo, useState, useRef } from 'react'
-import { AgGridReact } from 'ag-grid-react'
-import {
-  ModuleRegistry,
-  ClientSideRowModelModule,
-  RowStyleModule,
-  RowSelectionModule,
-  NumberFilterModule,
-  TextFilterModule,
-  TooltipModule,
-} from 'ag-grid-community'
+import { useEffect, useMemo, useState } from 'react'
+import { DataGrid, SelectColumn, type Column } from 'react-data-grid'
 import {
   collection,
   query,
@@ -28,19 +19,8 @@ import {
   type User,
 } from 'firebase/auth'
 import { FirebaseError } from 'firebase/app'
-import type { CellValueChangedEvent, ColDef } from 'ag-grid-community'
 import { db, auth, googleProvider } from './firebase'
-import 'ag-grid-community/styles/ag-grid.css'
-import 'ag-grid-community/styles/ag-theme-alpine.css'
-
-ModuleRegistry.registerModules([
-  ClientSideRowModelModule,
-  RowStyleModule,
-  RowSelectionModule,
-  NumberFilterModule,
-  TextFilterModule,
-  TooltipModule,
-])
+import 'react-data-grid/lib/styles.css'
 
 interface SaleRecord {
   id?: string
@@ -70,20 +50,6 @@ const NATURES = [
 
 const getSaleRowsFromSnapshot = (docs: any[]) =>
   docs.map((doc) => ({ id: doc.id, ...doc.data() })) as SaleRecord[]
-
-const parseEditableValue = (field: string, value: any) => {
-  if (field === 'level' || field === 'price') {
-    return Number(value)
-  }
-
-  if (field === 'shiny') {
-    if (typeof value === 'boolean') return value
-    const text = String(value).toLowerCase().trim()
-    return text === 'sim' || text === 'true' || text === '1'
-  }
-
-  return value
-}
 
 const IV_LABELS = ['HP', 'ATK', 'DEF', 'SATK', 'SDEF', 'SPD'] as const
 
@@ -120,7 +86,7 @@ function AdminSales() {
   const [rowData, setRowData] = useState<SaleRecord[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const gridApiRef = useRef<any>(null)
+  const [selectedRows, setSelectedRows] = useState<ReadonlySet<string>>(() => new Set())
   const [showAddForm, setShowAddForm] = useState(false)
   const [newRow, setNewRow] = useState<Omit<SaleRecord, 'id'>>({
     pokemon: '',
@@ -252,26 +218,31 @@ function AdminSales() {
 
   const handleEditSelected = () => {
     setError(null)
-    const api = gridApiRef.current
-    if (!api) return
-    const selectedRows = api.getSelectedRows() || []
-    if (selectedRows.length === 0) {
-      // se nada selecionado, abrir edição da primeira linha (comodidade para testes)
-      if (rowData && rowData.length > 0) {
+    const selectedIds = Array.from(selectedRows)
+    if (selectedIds.length === 0) {
+      if (rowData.length > 0) {
         setEditingRow(rowData[0])
+        setEditingOriginalStatus(String(rowData[0]?.status ?? ''))
         setShowAddForm(true)
         return
       }
       setError('Selecione uma linha para editar.')
       return
     }
-    if (selectedRows.length > 1) {
+    if (selectedIds.length > 1) {
       setError('Selecione apenas uma linha para editar.')
       return
     }
 
-    setEditingRow(selectedRows[0])
-    setEditingOriginalStatus(String(selectedRows[0]?.status ?? ''))
+    const selectedId = selectedIds[0]
+    const selectedRow = rowData.find((row) => row.id === selectedId)
+    if (!selectedRow) {
+      setError('Erro ao localizar a linha selecionada.')
+      return
+    }
+
+    setEditingRow(selectedRow)
+    setEditingOriginalStatus(String(selectedRow.status ?? ''))
     setShowAddForm(true)
   }
 
@@ -317,22 +288,19 @@ function AdminSales() {
   const handleDeleteSelected = async () => {
     setError(null)
     try {
-      const api = gridApiRef.current
-      if (!api) return
-      const selectedRows = api.getSelectedRows() || []
-      if (selectedRows.length === 0) {
+      if (selectedRows.size === 0) {
         setError('Nenhuma linha selecionada para remoção.')
         return
       }
 
       await Promise.all(
-        selectedRows.map((row: any) => {
-          const id = row?.id
+        Array.from(selectedRows).map((id) => {
           if (!id) return Promise.resolve()
           return deleteDoc(doc(db, salesCollectionName, id))
         })
       )
 
+      setSelectedRows(new Set())
       await fetchSales()
     } catch (err) {
       console.error(err)
@@ -340,72 +308,45 @@ function AdminSales() {
     }
   }
 
-  const handleCellValueChanged = async (params: CellValueChangedEvent<SaleRecord>) => {
-    if (!params.data?.id) return
+  const rowKeyGetter = (row: SaleRecord) => row.id ?? ''
 
-    const field = String(params.colDef.field)
-    const value = parseEditableValue(field, params.newValue)
-
-    try {
-      await updateDoc(doc(db, salesCollectionName, params.data.id), {
-        [field]: value,
-      })
-    } catch (err) {
-      console.error(err)
-      setError('Falha ao salvar alteração de venda.')
-    }
+  const rowClass = (row: SaleRecord) => {
+    const status = String(row.status || '').toLowerCase()
+    const classes = []
+    if (status === 'vendido') classes.push('sold-row')
+    if (status === 'reservado') classes.push('reserved-row')
+    if (row.shiny) classes.push('shiny-row')
+    return classes.join(' ') || undefined
   }
 
-  const columnDefs = useMemo<ColDef[]>(
+  const columns = useMemo<readonly Column<SaleRecord>[]>(
     () => [
-      { headerName: '', field: '__select', checkboxSelection: true, headerCheckboxSelection: true, width: 48, pinned: 'left' },
-      { field: 'pokemon', headerName: 'Pokemon', flex: 1, sortable: true, filter: true },
+      SelectColumn,
+      { key: 'pokemon', name: 'Pokemon', sortable: true, resizable: true },
+      { key: 'level', name: 'Level', sortable: true, resizable: true, width: 100 },
+      { key: 'ability', name: 'Ability', sortable: true, resizable: true },
+      { key: 'nature', name: 'Nature', sortable: true, resizable: true },
+      { key: 'ivs', name: "IV's", sortable: true, resizable: true },
       {
-        field: 'level',
-        headerName: 'Level',
-        width: 110,
+        key: 'shiny',
+        name: 'Shiny',
         sortable: true,
-        filter: 'agNumberColumnFilter',
-        
-        valueParser: ({ newValue }) => Number(newValue),
-      },
-      { field: 'ability', headerName: 'Ability', flex: 1, sortable: true, filter: true },
-      { field: 'nature', headerName: 'Nature', flex: 1, sortable: true, filter: true },
-      {
-        field: 'ivs',
-        headerName: "IV's",
-        flex: 1,
-        sortable: true,
-        filter: true,
-        
-        headerTooltip: 'HP/ATK/DEF/SATK/SDEF/SPD',
-        tooltipValueGetter: () => 'HP/ATK/DEF/SATK/SDEF/SPD',
+        resizable: true,
+        renderCell: ({ row }: { row: SaleRecord }) => <>{row.shiny ? 'Sim' : 'Não'}</>,
       },
       {
-        field: 'shiny',
-        headerName: 'Shiny',
-        width: 110,
+        key: 'price',
+        name: 'P. Dollars',
         sortable: true,
-        filter: true,
-        
-        valueFormatter: ({ value }) => (value ? 'Sim' : 'Não'),
-        valueParser: ({ newValue }) => String(newValue).toLowerCase() === 'sim',
-      },
-      {
-        field: 'price',
-        headerName: 'P. Dollars',
-        width: 140,
-        sortable: true,
-        filter: 'agNumberColumnFilter',
-        
-        valueFormatter: ({ value }) => {
-          if (typeof value !== 'number') return value
-          if (value >= 1000) return `$ ${Math.round(value / 1000)}k`
-          return `$ ${value}`
+        resizable: true,
+        width: 130,
+        renderCell: ({ row }: { row: SaleRecord }) => {
+          const value = row.price
+          if (typeof value !== 'number') return <>{value}</>
+          return <>{value >= 1000 ? `$ ${Math.round(value / 1000)}k` : `$ ${value}`}</>
         },
-        valueParser: ({ newValue }) => Number(newValue),
       },
-      { field: 'status', headerName: 'Status atual', width: 150, sortable: true, filter: true },
+      { key: 'status', name: 'Status atual', sortable: true, resizable: true, width: 140 },
     ],
     []
   )
@@ -453,7 +394,7 @@ function AdminSales() {
           {loading ? (
             <p>Carregando vendas para edição...</p>
           ) : (
-            <div className="ag-theme-alpine sales-grid" style={{ padding: '1em' }}>
+            <div className="sales-grid" style={{ padding: '1em' }}>
               <div className="admin-grid-actions" style={{ marginBottom: 8 }}>
                 {!showAddForm ? (
                   <>
@@ -567,25 +508,15 @@ function AdminSales() {
                 )}
               </div>
 
-              <AgGridReact
-                rowData={rowData}
-                columnDefs={columnDefs}
-                getRowId={(params) => params.data.id}
-                rowSelection="multiple"
-                rowMultiSelectWithClick={true}
-                onGridReady={(params) => {
-                  gridApiRef.current = params.api
-                }}
-                domLayout="autoHeight"
-                enableBrowserTooltips={true}
-                tooltipShowDelay={0}
-                defaultColDef={{ resizable: true }}
-                onCellValueChanged={handleCellValueChanged}
-                rowClassRules={{
-                  'shiny-row': (params) => params.data?.shiny === true,
-                  'sold-row': (params) => params.data?.status?.toLowerCase() === 'vendido',
-                  'reserved-row': (params) => params.data?.status?.toLowerCase() === 'reservado',
-                }}
+              <DataGrid
+                columns={columns}
+                rows={rowData}
+                rowKeyGetter={rowKeyGetter}
+                selectedRows={selectedRows}
+                onSelectedRowsChange={(nextSelected) => setSelectedRows(new Set(nextSelected))}
+                rowClass={rowClass}
+                defaultColumnOptions={{ resizable: true, sortable: true }}
+                style={{ minHeight: 400 }}
               />
             </div>
           )}

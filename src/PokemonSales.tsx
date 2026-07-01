@@ -1,13 +1,8 @@
-import { useMemo, useState, useEffect } from 'react'
-import { AgGridReact } from 'ag-grid-react'
-import { ModuleRegistry, ClientSideRowModelModule, RowStyleModule, NumberFilterModule, TextFilterModule, TooltipModule } from 'ag-grid-community'
+import { useEffect, useMemo, useState } from 'react'
+import { DataGrid, type Column } from 'react-data-grid'
 import { collection, query, orderBy, getDocs, addDoc, serverTimestamp } from 'firebase/firestore'
-import type { ColDef } from 'ag-grid-community'
-import 'ag-grid-community/styles/ag-grid.css'
-import 'ag-grid-community/styles/ag-theme-alpine.css'
 import { db } from './firebase'
-
-ModuleRegistry.registerModules([ClientSideRowModelModule, RowStyleModule, NumberFilterModule, TextFilterModule, TooltipModule])
+import 'react-data-grid/lib/styles.css'
 
 interface SaleRecord {
   id?: string
@@ -37,7 +32,7 @@ const seedRowData: SaleRecord[] = [
     level: 65,
     ability: 'Levitate',
     nature: 'Timid',
-    ivs: '31/31/30/31/31/31',
+    ivs: '31/31/30/31/31/31/31',
     shiny: true,
     price: 380,
     status: 'Vendido',
@@ -47,7 +42,7 @@ const seedRowData: SaleRecord[] = [
     level: 70,
     ability: 'Trace',
     nature: 'Modest',
-    ivs: '31/31/31/30/31/31',
+    ivs: '31/31/31/30/31/31/31',
     shiny: false,
     price: 500,
     status: 'Reservado',
@@ -57,7 +52,7 @@ const seedRowData: SaleRecord[] = [
     level: 70,
     ability: 'Trace',
     nature: 'Modest',
-    ivs: '31/31/31/30/31/31',
+    ivs: '31/31/31/30/31/31/31',
     shiny: true,
     price: 500,
     status: 'Disponível',
@@ -115,54 +110,61 @@ function PokemonSales() {
   }
 
   useEffect(() => {
-    fetchSales()
+    void fetchSales()
   }, [])
 
-  const columnDefs = useMemo<ColDef[]>(
+  const columns = useMemo<readonly Column<SaleRecord>[]>(
     () => [
-      { field: 'pokemon', headerName: 'Pokemon', flex: 1, sortable: true, filter: true },
-      { field: 'level', headerName: 'Level', width: 110, sortable: true, filter: 'agNumberColumnFilter' },
-      { field: 'ability', headerName: 'Ability', flex: 1, sortable: true, filter: true },
-      { field: 'nature', headerName: 'Nature', flex: 1, sortable: true, filter: true },
+      { key: 'pokemon', name: 'Pokemon', sortable: true, resizable: true },
+      { key: 'level', name: 'Level', sortable: true, resizable: true, width: 110 },
+      { key: 'ability', name: 'Ability', sortable: true, resizable: true },
+      { key: 'nature', name: 'Nature', sortable: true, resizable: true },
+      { key: 'ivs', name: "IV's", sortable: true, resizable: true },
       {
-        field: 'ivs',
-        headerName: "IV's",
-        flex: 1,
+        key: 'shiny',
+        name: 'Shiny',
         sortable: true,
-        filter: true,
-        headerTooltip: 'HP/ATK/DEF/SATK/SDEF/SPD',
-        tooltipValueGetter: () => 'HP/ATK/DEF/SATK/SDEF/SPD',
+        resizable: true,
+        width: 100,
+        renderCell: ({ row }: { row: SaleRecord }) => <>{row.shiny ? 'Sim' : 'Não'}</>,
       },
-      { field: 'shiny', headerName: 'Shiny', width: 100, sortable: true, filter: true, valueFormatter: ({ value }) => (value ? 'Sim' : 'Não') },
       {
-        field: 'price',
-        headerName: 'P. Dollars',
-        width: 140,
+        key: 'price',
+        name: 'P. Dollars',
         sortable: true,
-        filter: 'agNumberColumnFilter',
-        valueFormatter: ({ value }) => {
+        resizable: true,
+        width: 140,
+        renderCell: ({ row }: { row: SaleRecord }) => {
+          const value = row.price
           if (typeof value !== 'number') {
-            return value
+            return <>{value}</>
           }
 
-          if (value >= 1000) {
-            return `$ ${Math.round(value / 1000)}k`
-          }
-
-          return `$ ${value}`
+          return <>{value >= 1000 ? `$ ${Math.round(value / 1000)}k` : `$ ${value}`}</>
         },
       },
-      { field: 'status', headerName: 'Status atual', width: 150, sortable: true, filter: true },
+      { key: 'status', name: 'Status atual', sortable: true, resizable: true, width: 150 },
     ],
     []
   )
+
+  const rowKeyGetter = (row: SaleRecord) => row.id ?? ''
+
+  const rowClass = (row: SaleRecord) => {
+    const status = String(row.status || '').toLowerCase()
+    const classes = []
+    if (row.shiny) classes.push('shiny-row')
+    if (status === 'vendido') classes.push('sold-row')
+    if (status === 'reservado') classes.push('reserved-row')
+    return classes.join(' ') || undefined
+  }
 
   return (
     <section className="sales-page">
       <div className="sales-header">
         <div>
           <p className="eyebrow">VENDAS DE POKÉMONS</p>
-          <h2>Minhas vendas de Pokémons listadas com AG Grid</h2>
+          <h2>Minhas vendas de Pokémons listadas com React Data Grid</h2>
         </div>
       </div>
       {error ? (
@@ -174,18 +176,14 @@ function PokemonSales() {
         </div>
       ) : null}
       {loading ? <p>Carregando vendas...</p> : <p className="sales-note">IV's = HP/ATK/DEF/SATK/SDEF/SPD</p>}
-      <div className="ag-theme-alpine sales-grid" style={{ padding: '1em' }}>
-        <AgGridReact
-          rowData={rowData}
-          columnDefs={columnDefs}
-          domLayout="autoHeight"
-          enableBrowserTooltips={true}
-          tooltipShowDelay={0}
-          rowClassRules={{
-            'shiny-row': (params) => params.data?.shiny === true,
-            'sold-row': (params) => params.data?.status?.toLowerCase() === 'vendido',
-            'reserved-row': (params) => params.data?.status?.toLowerCase() === 'reservado',
-          }}
+      <div className="sales-grid" style={{ padding: '1em' }}>
+        <DataGrid
+          rows={rowData}
+          columns={columns}
+          rowKeyGetter={rowKeyGetter}
+          rowClass={rowClass}
+          defaultColumnOptions={{ resizable: true, sortable: true }}
+          style={{ minHeight: 400 }}
         />
       </div>
     </section>

@@ -359,16 +359,25 @@
   }
 }
 
-.ag-theme-alpine .ag-row.shiny-row .ag-cell {
-  background-color: rgba(20, 20, 20, 0.24) !important;
+.sales-grid .rdg {
+  --rdg-background-color: #121316;
+  --rdg-header-background-color: #16171a;
+  --rdg-row-hover-background-color: rgba(245, 158, 11, 0.08);
+  --rdg-row-selected-background-color: rgba(245, 158, 11, 0.14);
+  --rdg-color: #f8fafc;
+  --rdg-border-color: rgba(255, 255, 255, 0.08);
 }
 
-.ag-theme-alpine .ag-row.sold-row .ag-cell {
-  background-color: rgba(239, 68, 68, 0.18) !important;
+.sales-grid .rdg-row.shiny-row > .rdg-cell {
+  background-color: rgba(251, 191, 36, 0.12);
 }
 
-.ag-theme-alpine .ag-row.reserved-row .ag-cell {
-  background-color: rgba(234, 179, 8, 0.18) !important;
+.sales-grid .rdg-row.sold-row > .rdg-cell {
+  background-color: rgba(239, 68, 68, 0.16);
+}
+
+.sales-grid .rdg-row.reserved-row > .rdg-cell {
+  background-color: rgba(234, 179, 8, 0.16);
 }
 
 .menu-link.active {
