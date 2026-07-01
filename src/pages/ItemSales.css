@@ -42,6 +42,19 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.item-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.item-cell-image {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
+}
+
 .sold-row {
   background: rgba(248, 113, 113, 0.08);
 }

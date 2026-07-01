@@ -31,9 +31,39 @@ function ItemSales() {
     void fetchSales()
   }, [])
 
+  const getItemSpriteUrl = (name: string) => {
+    const normalized = name
+      .trim()
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/\p{Diacritic}/gu, '')
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+
+    return `https://img.pokemondb.net/sprites/items/${normalized}.png`
+  }
+
   const columns = useMemo(
     () => [
-      { key: 'name', name: 'Nome', sortable: true, resizable: true },
+      {
+        key: 'name',
+        name: 'Nome',
+        sortable: true,
+        resizable: true,
+        renderCell: ({ row }: { row: ItemRecord }) => (
+          <div className="item-cell">
+            <img
+              src={getItemSpriteUrl(row.name)}
+              alt={row.name}
+              className="item-cell-image"
+              onError={(event) => {
+                event.currentTarget.style.visibility = 'hidden'
+              }}
+            />
+            <span>{row.name}</span>
+          </div>
+        ),
+      },
       { key: 'category', name: 'Categoria', sortable: true, resizable: true },
       { key: 'status', name: 'Status', sortable: true, resizable: true, width: 130 },
       {
