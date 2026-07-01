@@ -38,7 +38,7 @@ function ItemSales() {
       { key: 'status', name: 'Status', sortable: true, resizable: true, width: 130 },
       {
         key: 'price',
-        name: 'Preço',
+        name: 'P. Dollars',
         sortable: true,
         resizable: true,
         width: 130,

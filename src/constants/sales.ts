@@ -85,9 +85,25 @@ export const mergeIvsParts = (parts: string[]) =>
     })
     .join('/')
 
+const formatCompactValue = (value: number) => {
+  if (value >= 1000000) {
+    const millions = value / 1000000
+    const formatted = Number.isInteger(millions) ? String(millions) : millions.toFixed(1)
+    return `${formatted}M`
+  }
+
+  if (value >= 1000) {
+    const thousands = value / 1000
+    const formatted = Number.isInteger(thousands) ? String(thousands) : thousands.toFixed(1)
+    return `${formatted}k`
+  }
+
+  return String(value)
+}
+
 export const formatPrice = (value: number | string) => {
   if (typeof value !== 'number') return String(value)
-  return value >= 1000 ? `$ ${Math.round(value / 1000)}k` : `$ ${value}`
+  return `$ ${formatCompactValue(value)}`
 }
 
 export const logHistory = async (title: string, description: string) => {

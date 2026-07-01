@@ -235,7 +235,7 @@ function AdminItemSales() {
       { key: 'status', name: 'Status', sortable: true, resizable: true, width: 120 },
       {
         key: 'price',
-        name: 'Preço',
+        name: 'P. Dollars',
         sortable: true,
         resizable: true,
         width: 120,
