@@ -1,7 +1,10 @@
 import type { ExpandedGuide } from './expanded-guide'
+import imgKantoLavender from '/src/assets/guides/item-sales/kanto-lavender.png'
+import imgJohtoGoldenrod from '/src/assets/guides/item-sales/johto-goldenrod.png'
 import imgUnovaRouteU5Outside from '/src/assets/guides/item-sales/unova-route-u5-outside.png'
 import imgUnovaRouteU5Inside from '/src/assets/guides/item-sales/unova-route-u5-inside.png'
-import imgJohtoGoldenrod from '/src/assets/guides/item-sales/johto-goldenrod.png'
+import imgUnovaUndellaPokemonCenterBillionaireManiac from '/src/assets/guides/item-sales/unova-undella-pokemon-center-billionaire-maniac.png'
+import imgUnovaIcirrusPokemonCenterOreManiac from '/src/assets/guides/item-sales/unova-icirrus-pokemon-center-ore-maniac.png'
 
 export const itemSalesGuide: ExpandedGuide = {
   slug: 'item-sales',
@@ -22,12 +25,14 @@ export const itemSalesGuide: ExpandedGuide = {
         {
           title: 'Unova - Icirrus City - NPC dentro do PokeCenter',
           description: '- Comet Shard\n- Pearl String',
-          image: '',
+          imageWidthNatural: true,
+          image: imgUnovaIcirrusPokemonCenterOreManiac,
         },
         {
           title: 'Unova - Undella Town - PokeCenter - NPC Billionaire Maniac',
           description: '- Relics',
-          image: '',
+          imageWidthNatural: true,
+          image: imgUnovaUndellaPokemonCenterBillionaireManiac,
         },
         {
           title: 'Unova Route U5 - Entre dentro da Van para conseguir vender',
@@ -42,7 +47,7 @@ export const itemSalesGuide: ExpandedGuide = {
           title: 'Kanto - Lavender Town / Johto - Goldenrod City | Barraquinha rocha',
           description: '- Stardust\n- Star Piece\n- Nugget\n- Big Nugget\n- Pearl\n- Big Pearl\n- Rare Bone',
           imageWidthNatural: true,
-          image: [imgJohtoGoldenrod,]
+          image: [imgJohtoGoldenrod, imgKantoLavender]
         },
       ]
     },    
