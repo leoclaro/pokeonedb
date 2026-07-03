@@ -1,3 +1,5 @@
+import './LivePage.css'
+
 export default function LivePage() {
   return (
     <section className="live-page">

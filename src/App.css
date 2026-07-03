@@ -262,7 +262,8 @@
 .page-header,
 .detail-header {
   display: grid;
-  gap: 14px;
+  /* EU COMENTEI
+  gap: 14px; */
   /* EU COMENTEI
   margin-bottom: 24px; */
 }
