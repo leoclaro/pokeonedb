@@ -1,4 +1,4 @@
-import type { ExpandedGuide } from './sevii-island-dailies'
+import type { ExpandedGuide } from './expanded-guide'
 
 export const kantoDailiesGuide: ExpandedGuide = {
   slug: 'kanto-dailies',

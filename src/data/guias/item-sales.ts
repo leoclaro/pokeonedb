@@ -1,4 +1,4 @@
-import type { ExpandedGuide } from './sevii-island-dailies'
+import type { ExpandedGuide } from './expanded-guide'
 import imgUnovaRouteU5Outside from '/src/assets/guides/item-sales/unova-route-u5-outside.png'
 import imgUnovaRouteU5Inside from '/src/assets/guides/item-sales/unova-route-u5-inside.png'
 

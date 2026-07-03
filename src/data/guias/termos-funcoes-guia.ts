@@ -1,30 +1,6 @@
-export interface Step{
-  stepTitle: string,
-  steps: GuideStep[]
-}
+import type { ExpandedGuide } from './expanded-guide'
 
-export interface GuideStep {
-  title: string
-  description: string
-  image?: string | string[],
-  imageWidthNatural?: boolean
-}
-
-export interface ExpandedGuide {
-  slug: string
-  title: string
-  subtitle: string
-  description: string,
-  imageIsOnlyCard?: boolean,
-  image: string
-  summary: string
-  topics: string[]
-  steps: Step[]
-  tips?: string[]
-  images?: string[]
-}
-
-export const seviiIslandDailiesGuide: ExpandedGuide = {
+export const termosFuncoesGuide: ExpandedGuide = {
   slug: 'termos-funcoes-setups',
   title: 'Termos e Funções',
   subtitle: 'Guia de termos e funções de setups',
