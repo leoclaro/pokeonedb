@@ -1,4 +1,5 @@
 import type { ExpandedGuide } from './expanded-guide'
+import imgTermosFuncoes from '/src/assets/guides/termos-funcoes/1.jpeg'
 
 export const termosFuncoesGuide: ExpandedGuide = {
   slug: 'termos-funcoes-setups',
@@ -7,9 +8,9 @@ export const termosFuncoesGuide: ExpandedGuide = {
   description:
     'O guia prático a seguir detalha os principais termos e funções de setup essenciais para a montagem e a execução de uma equipe competitiva.',
   summary:
-    'Um guia completo para as tarefas diárias, recompensas e pontos de interesse das Ilhas Sevii.',
+    'Campo solar chamado pela ability Drought do Torkoal quando entrou em campo.',
   image:
-    '',
+    imgTermosFuncoes,
   topics: ['⚔️ Estruturas e Funções no Time (Ataque e Ofensiva)', '🛡️ Controle de Campo e Suporte (Enablers e Defesa)'],
   steps: [
     {
