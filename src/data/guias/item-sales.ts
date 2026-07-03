@@ -8,39 +8,34 @@ export const itemSalesGuide: ExpandedGuide = {
     'Essa guia irá te ensinar onde vender determinados itens adquiridos em sua jornada, sendo boa parte deles dropados de boss feitos diariamente.',
   summary:
     'Irei listar os locais de venda, e quais itens conseguirá vender nesses locais.',
+  imageIsOnlyCard: true,
   image:
     '/src/assets/guides/item-sales/unova-route-u5-outside.png',
-  topics: [
-    'Pontos de venda',
-    'NPCs comerciantes',
-    'Farm de moedas',
-    'Itens valiosos',
-    'Maximizar lucro',
-  ],
+  topics: [],
   steps: [
     {
       title: 'ICIRRUS PC',
       description: 'Comet Shard\nPearl String',
-      image:
-        '/src/assets/guides/item-sales/unova-route-u5-outside.png',
+      image: '',
     },
     {
       title: 'UNDELLA PC - Billionaire Maniac',
       description: 'Relics',
-      image:
-        '/src/assets/guides/item-sales/unova-route-u5-outside.png',
+      image: '',
     },
     {
       title: 'Unova Route U5 - Entre dentro da Van para conseguir vender',
       description: 'Balm Mushroom',
-      image:
-        '/src/assets/guides/item-sales/unova-route-u5-inside.png',
+      imageWidthNatural: true,
+      image:[        
+            '/src/assets/guides/item-sales/unova-route-u5-outside.png',
+            '/src/assets/guides/item-sales/unova-route-u5-inside.png'
+        ]
     },
     {
       title: 'Lavander / Goldenrod - Barraquinha rocha',
       description: 'Stardust\nStar Piece\nNugget\nBig Nugget\nPearl\nBig Pearl\nRare Bone',
-      image:
-        '/src/assets/guides/item-sales/unova-route-u5-outside.png',
+      image: '',
     },
   ],
   tips: [

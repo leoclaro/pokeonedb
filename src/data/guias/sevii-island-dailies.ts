@@ -1,14 +1,16 @@
 export interface GuideStep {
   title: string
   description: string
-  image?: string
+  image?: string | string[],
+  imageWidthNatural?: boolean
 }
 
 export interface ExpandedGuide {
   slug: string
   title: string
   subtitle: string
-  description: string
+  description: string,
+  imageIsOnlyCard?: boolean,
   image: string
   summary: string
   topics: string[]

@@ -31,19 +31,19 @@ export default function GuideDetail() {
       </div>
 
       <div className="detail-content">
-        <div className="detail-preview">
+        {guide.image && guide.image.length > 0 && guide.imageIsOnlyCard != true && (<div className="detail-preview">
           <img src={guide.image} alt={guide.title} />
           <p>{guide.summary}</p>
-        </div>
+        </div>)}
 
-        <div className="detail-topics">
+        {guide.topics && guide.topics.length > 0 && (<div className="detail-topics">
           <h3>O que você encontrará aqui</h3>
           <ul>
             {guide.topics.map((topic) => (
               <li key={topic}>{topic}</li>
             ))}
           </ul>
-        </div>
+        </div>)}
 
         {guide.steps && guide.steps.length > 0 && (
           <div className="detail-steps">
@@ -52,7 +52,24 @@ export default function GuideDetail() {
               <div key={index} className="step-item">
                 <h4>{step.title}</h4>
                 <p>{step.description}</p>
-                {step.image && <img src={step.image} alt={step.title} />}
+                {step.image && (
+                  Array.isArray(step.image) ? (
+                    step.image.map((img, imgIndex) => (
+                      <img
+                        key={imgIndex}
+                        src={img}
+                        alt={step.title}
+                        style={step.imageWidthNatural ? { width: 'auto', maxWidth: 'none' } : undefined}
+                      />
+                    ))
+                  ) : (
+                    <img
+                      src={step.image}
+                      alt={step.title}
+                      style={step.imageWidthNatural ? { width: 'auto', maxWidth: 'none' } : undefined}
+                    />
+                  )
+                )}
               </div>
             ))}
           </div>
