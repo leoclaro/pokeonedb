@@ -44,6 +44,19 @@ export default function GuideDetail() {
             ))}
           </ul>
         </div>
+
+        {guide.steps && guide.steps.length > 0 && (
+          <div className="detail-steps">
+            <h3>Locais de Venda</h3>
+            {guide.steps.map((step, index) => (
+              <div key={index} className="step-item">
+                <h4>{step.title}</h4>
+                <p>{step.description}</p>
+                {step.image && <img src={step.image} alt={step.title} />}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   )
