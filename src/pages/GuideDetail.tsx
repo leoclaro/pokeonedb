@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { getGuideBySlug } from '../data/guides'
+import React from 'react'
 
 export default function GuideDetail() {
   const { slug } = useParams<{ slug: string }>()
@@ -45,35 +46,37 @@ export default function GuideDetail() {
           </ul>
         </div>)}
 
-        {guide.steps && guide.steps.length > 0 && (
-          <div className="detail-steps">
-            <h3>Locais de Venda</h3>
-            {guide.steps.map((step, index) => (
-              <div key={index} className="step-item">
-                <h4>{step.title}</h4>
-                <p>{step.description}</p>
-                {step.image && (
-                  Array.isArray(step.image) ? (
-                    step.image.map((img, imgIndex) => (
+        {guide.steps && guide.steps.length > 0 && (<div className="detail-steps">
+          {guide.steps.map((step, index) => (
+            <React.Fragment key={index}>
+              <h3>{step.stepTitle}</h3>
+              {step.steps.map((stepGuide, indexGuide) => (
+                <div key={indexGuide} className="step-item">
+                  <h4>{stepGuide.title}</h4>
+                  <p>{stepGuide.description}</p>
+                  {stepGuide.image && (
+                    Array.isArray(stepGuide.image) ? (
+                      stepGuide.image.map((img, imgIndex) => (
+                        <img
+                          key={imgIndex}
+                          src={img}
+                          alt={stepGuide.title}
+                          style={stepGuide.imageWidthNatural ? { width: 'auto', maxWidth: 'none' } : undefined}
+                        />
+                      ))
+                    ) : (
                       <img
-                        key={imgIndex}
-                        src={img}
-                        alt={step.title}
-                        style={step.imageWidthNatural ? { width: 'auto', maxWidth: 'none' } : undefined}
+                        src={stepGuide.image}
+                        alt={stepGuide.title}
+                        style={stepGuide.imageWidthNatural ? { width: 'auto', maxWidth: 'none' } : undefined}
                       />
-                    ))
-                  ) : (
-                    <img
-                      src={step.image}
-                      alt={step.title}
-                      style={step.imageWidthNatural ? { width: 'auto', maxWidth: 'none' } : undefined}
-                    />
-                  )
-                )}
-              </div>
-            ))}
-          </div>
-        )}
+                    )
+                  )}
+                </div>
+              ))}
+            </React.Fragment>
+          ))}
+        </div>)}
       </div>
     </section>
   )
