@@ -1,6 +1,8 @@
 .home-hero-section {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  /* EU MUDEI
+  grid-template-columns: 1.2fr 0.8fr; */
+  grid-template-columns: 1.4fr 0.6fr;
   gap: 24px;
   padding: 38px 0 28px;
   align-items: start;
@@ -93,7 +95,9 @@
 
 .home-content-grid {
   display: grid;
-  grid-template-columns: 1.6fr 0.9fr;
+  /* EU MUDEI 
+  grid-template-columns: 1.6fr 0.9fr; */
+  grid-template-columns: 1.4fr 0.6fr;
   gap: 24px;
   margin-top: 12px;
 }

@@ -34,18 +34,22 @@ function HomePage({ latestHistory }: HomePageProps) {
 
         <aside className="home-hero-panel">
           <div className="home-panel-card">
-            <h2>POKÉONE</h2>
-            <p>DOWNLOAD</p>
-            <p>Forum</p>
+            <h2>POKÉONE OFICIAL</h2>
+            <p><a href="https://pokeonecommunity.com/" target="_blank" rel="noreferrer">
+            Site Oficial</a></p>
+            <p><a
+              href="https://pokeonecommunity.com/multimedia/download/"              
+              target="_blank"
+              rel="noreferrer"
+            >Download do Jogo</a></p>
+            <p><a href="https://discord.com/invite/bNYRTFn" target="_blank" rel="noreferrer">
+              Discord Oficial
+            </a></p>
           </div>
           <div className="home-panel-card">
-            <h2>CHECK OUT</h2>
-            <p>OUR GUIDES</p>
-            <p>PokeOne Download</p>
-          </div>
-          <div className="home-panel-card">
-            <h2>JOIN OUR</h2>
-            <p>DISCORD</p>
+            <h2>CONFIRA</h2>
+            <p><a href="#/guides">Nossos Guias</a></p>
+            <p><a href="https://www.youtube.com/@5uperGamming" target="_blank" rel="noreferrer">Nossas Transmissões</a></p>
           </div>
         </aside>
       </section>
@@ -72,13 +76,9 @@ function HomePage({ latestHistory }: HomePageProps) {
           </div>
         </div>
 
-        <aside className="home-side-column">
-          <div className="home-side-block">
-            <h3 className="home-section-title">YOUTUBE STREAM</h3>
-            <p>Minhas transmissões de aventura, guias, e eventos.</p>
-          </div>
+        <aside className="home-side-column" style={{ display: 'block' }}>
 
-          <div className="home-side-block">
+          <div className="home-side-block"  style={{ marginBottom: '16px' }}>
             <h3 className="home-section-title">RANDOM GUIDES</h3>
             <ul>
               <li>Sevii Island Dailies</li>
@@ -91,8 +91,12 @@ function HomePage({ latestHistory }: HomePageProps) {
           <div className="home-side-block">
             <h3 className="home-section-title">SOCIAL</h3>
             <ul>
-              {['YouTube', 'Twitch', 'Discord'].map((link) => (
-                <li key={link}>{link}</li>
+              {[{ name: 'YouTube', url: 'https://www.youtube.com/@5uperGamming' }].map((link) => (
+                <li key={link.name}>
+                  <a href={link.url} target="_blank" rel="noreferrer">
+                    {link.name}
+                  </a>
+                </li>
               ))}
             </ul>
           </div>
