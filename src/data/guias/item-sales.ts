@@ -1,4 +1,6 @@
 import type { ExpandedGuide } from './sevii-island-dailies'
+import imgUnovaRouteU5Outside from '/src/assets/guides/item-sales/unova-route-u5-outside.png'
+import imgUnovaRouteU5Inside from '/src/assets/guides/item-sales/unova-route-u5-inside.png'
 
 export const itemSalesGuide: ExpandedGuide = {
   slug: 'item-sales',
@@ -10,7 +12,7 @@ export const itemSalesGuide: ExpandedGuide = {
     'Irei listar os locais de venda, e quais itens conseguirá vender nesses locais.',
   imageIsOnlyCard: true,
   image:
-    '/src/assets/guides/item-sales/unova-route-u5-outside.png',
+    imgUnovaRouteU5Outside,
   topics: [],
   steps: [
     {
@@ -28,8 +30,8 @@ export const itemSalesGuide: ExpandedGuide = {
       description: 'Balm Mushroom',
       imageWidthNatural: true,
       image:[        
-            '/src/assets/guides/item-sales/unova-route-u5-outside.png',
-            '/src/assets/guides/item-sales/unova-route-u5-inside.png'
+            imgUnovaRouteU5Outside,
+            imgUnovaRouteU5Inside
         ]
     },
     {
@@ -46,7 +48,7 @@ export const itemSalesGuide: ExpandedGuide = {
     'Verifique os preços de cada item antes de vender em massa',
   ],
   images: [
-    '/src/assets/guides/item-sales/unova-route-u5-outside.png',
-    '/src/assets/guides/item-sales/unova-route-u5-inside.png',
+    imgUnovaRouteU5Outside,
+    imgUnovaRouteU5Inside,
   ],
 }
