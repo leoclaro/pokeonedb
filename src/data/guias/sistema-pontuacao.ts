@@ -7,8 +7,8 @@ import imgUnovaCastelia from '/src/assets/guides/sistema-pontuacao/unova-casteli
 import imgKantoCeladon from '/src/assets/guides/sistema-pontuacao/kanto-celadon.png'
 import imgJohtoGoldenrod from '/src/assets/guides/sistema-pontuacao/johto-goldenrod.png'
 
-export const kantoDailiesGuide: ExpandedGuide = {
-  slug: 'kanto-dailies',
+export const sistemaPontuacaoGuide: ExpandedGuide = {
+  slug: 'sistema-pontuacao',
   title: 'Sistema de Pontuação',
   subtitle: 'Como pontuar e resgatar as recompensas PVE',
   description:
