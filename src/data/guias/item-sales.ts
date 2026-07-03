@@ -20,12 +20,12 @@ export const itemSalesGuide: ExpandedGuide = {
       stepTitle: 'Locais de venda de itens',
       steps:[
         {
-          title: 'ICIRRUS PC',
+          title: 'Unova - Icirrus City - NPC dentro do PokeCenter',
           description: '- Comet Shard\n- Pearl String',
           image: '',
         },
         {
-          title: 'UNDELLA PC - Billionaire Maniac',
+          title: 'Unova - Undella Town - PokeCenter - NPC Billionaire Maniac',
           description: '- Relics',
           image: '',
         },
@@ -39,7 +39,7 @@ export const itemSalesGuide: ExpandedGuide = {
             ]
         },
         {
-          title: 'Lavander / Goldenrod - Barraquinha rocha',
+          title: 'Kanto - Lavender Town / Johto - Goldenrod City | Barraquinha rocha',
           description: '- Stardust\n- Star Piece\n- Nugget\n- Big Nugget\n- Pearl\n- Big Pearl\n- Rare Bone',
           imageWidthNatural: true,
           image: [imgJohtoGoldenrod,]
