@@ -16,29 +16,34 @@ export const itemSalesGuide: ExpandedGuide = {
   topics: [],
   steps: [
     {
-      title: 'ICIRRUS PC',
-      description: 'Comet Shard\nPearl String',
-      image: '',
-    },
-    {
-      title: 'UNDELLA PC - Billionaire Maniac',
-      description: 'Relics',
-      image: '',
-    },
-    {
-      title: 'Unova Route U5 - Entre dentro da Van para conseguir vender',
-      description: 'Balm Mushroom',
-      imageWidthNatural: true,
-      image:[        
-            imgUnovaRouteU5Outside,
-            imgUnovaRouteU5Inside
-        ]
-    },
-    {
-      title: 'Lavander / Goldenrod - Barraquinha rocha',
-      description: 'Stardust\nStar Piece\nNugget\nBig Nugget\nPearl\nBig Pearl\nRare Bone',
-      image: '',
-    },
+      stepTitle: 'Locais de venda de itens',
+      steps:[
+        {
+          title: 'ICIRRUS PC',
+          description: 'Comet Shard\nPearl String',
+          image: '',
+        },
+        {
+          title: 'UNDELLA PC - Billionaire Maniac',
+          description: 'Relics',
+          image: '',
+        },
+        {
+          title: 'Unova Route U5 - Entre dentro da Van para conseguir vender',
+          description: 'Balm Mushroom',
+          imageWidthNatural: true,
+          image:[        
+                imgUnovaRouteU5Outside,
+                imgUnovaRouteU5Inside
+            ]
+        },
+        {
+          title: 'Lavander / Goldenrod - Barraquinha rocha',
+          description: 'Stardust\nStar Piece\nNugget\nBig Nugget\nPearl\nBig Pearl\nRare Bone',
+          image: '',
+        },
+      ]
+    },    
   ],
   tips: [
     'Colete itens de boss diários para maximizar seu farm de moedas',

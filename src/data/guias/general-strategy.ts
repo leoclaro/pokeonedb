@@ -13,25 +13,15 @@ export const generalStrategyGuide: ExpandedGuide = {
   topics: ['Construção de time', 'Economia do jogo', 'PvP e PvE', 'Gerenciamento de itens'],
   steps: [
     {
-      title: 'Construção de Time Equilibrado',
-      description: 'Selecione 6 Pokémon com tipos variados que se complementem.',
-      image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1000&q=80',
-    },
-    {
-      title: 'Farming de Moeda e Itens',
-      description: 'Identifique as melhores rotas para farm de dinheiro e itens valiosos.',
-      image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1000&q=80',
-    },
-    {
-      title: 'Treinamento Estratégico',
-      description: 'Prepare seu time para diferentes tipos de batalhas e desafios.',
-      image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1000&q=80',
-    },
-    {
-      title: 'Participação em Eventos',
-      description: 'Aproveite eventos limitados para ganhar itens e experiência extra.',
-      image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1000&q=80',
-    },
+      stepTitle: 'Construção de Time',
+      steps: [
+        {
+          title: 'Construção de Time Equilibrado',
+          description: 'Selecione 6 Pokémon com tipos variados que se complementem.',
+          image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1000&q=80',
+        },
+      ]
+    },    
   ],
   tips: [
     'Invista em evolução de Pokémon com IV alto (individual values)',
