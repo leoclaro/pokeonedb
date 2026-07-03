@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom'
 import type { HistoryRecord } from '../types'
 import { menuItems } from '../components/NavBar'
 import './HomePage.css'
+import { guides } from '../data/guides'
 
 interface HomePageProps {
   latestHistory: HistoryRecord[]
@@ -81,10 +82,8 @@ function HomePage({ latestHistory }: HomePageProps) {
           <div className="home-side-block"  style={{ marginBottom: '16px' }}>
             <h3 className="home-section-title">RANDOM GUIDES</h3>
             <ul>
-              <li>Sevii Island Dailies</li>
-              <li>Kanto Dailies</li>
-              <li>General Strategy</li>
-              <li>Sevii Island Bosses</li>
+              {guides.map((guide) => (
+                <li>{guide.title}</li>))}
             </ul>
           </div>
 
