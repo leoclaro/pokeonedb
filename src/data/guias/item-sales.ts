@@ -1,6 +1,7 @@
 import type { ExpandedGuide } from './expanded-guide'
 import imgUnovaRouteU5Outside from '/src/assets/guides/item-sales/unova-route-u5-outside.png'
 import imgUnovaRouteU5Inside from '/src/assets/guides/item-sales/unova-route-u5-inside.png'
+import imgJohtoGoldenrod from '/src/assets/guides/item-sales/johto-goldenrod.png'
 
 export const itemSalesGuide: ExpandedGuide = {
   slug: 'item-sales',
@@ -40,7 +41,8 @@ export const itemSalesGuide: ExpandedGuide = {
         {
           title: 'Lavander / Goldenrod - Barraquinha rocha',
           description: '- Stardust\n- Star Piece\n- Nugget\n- Big Nugget\n- Pearl\n- Big Pearl\n- Rare Bone',
-          image: '',
+          imageWidthNatural: true,
+          image: [imgJohtoGoldenrod,]
         },
       ]
     },    
