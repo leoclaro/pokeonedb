@@ -20,17 +20,17 @@ export const itemSalesGuide: ExpandedGuide = {
       steps:[
         {
           title: 'ICIRRUS PC',
-          description: 'Comet Shard\nPearl String',
+          description: '- Comet Shard\n- Pearl String',
           image: '',
         },
         {
           title: 'UNDELLA PC - Billionaire Maniac',
-          description: 'Relics',
+          description: '- Relics',
           image: '',
         },
         {
           title: 'Unova Route U5 - Entre dentro da Van para conseguir vender',
-          description: 'Balm Mushroom',
+          description: '- Balm Mushroom',
           imageWidthNatural: true,
           image:[        
                 imgUnovaRouteU5Outside,
@@ -39,7 +39,7 @@ export const itemSalesGuide: ExpandedGuide = {
         },
         {
           title: 'Lavander / Goldenrod - Barraquinha rocha',
-          description: 'Stardust\nStar Piece\nNugget\nBig Nugget\nPearl\nBig Pearl\nRare Bone',
+          description: '- Stardust\n- Star Piece\n- Nugget\n- Big Nugget\n- Pearl\n- Big Pearl\n- Rare Bone',
           image: '',
         },
       ]

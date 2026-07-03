@@ -2,8 +2,8 @@ import type { ExpandedGuide } from './expanded-guide'
 
 export const kantoDailiesGuide: ExpandedGuide = {
   slug: 'kanto-dailies',
-  title: 'Kanto Dailies',
-  subtitle: 'O ciclo diário em Kanto para jogadores avançados',
+  title: 'Sistema de Pontuação',
+  subtitle: 'Como pontuar e resgatar as recompensas PVE',
   description:
     'Descubra o melhor caminho para cumprir tarefas diárias em Kanto e maximizar suas recompensas sem perder tempo.',
   summary:
