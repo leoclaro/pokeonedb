@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import type { HistoryRecord } from '../types'
 import { menuItems } from '../components/NavBar'
 import './HomePage.css'
@@ -83,7 +83,8 @@ function HomePage({ latestHistory }: HomePageProps) {
             <h3 className="home-section-title">RANDOM GUIDES</h3>
             <ul>
               {guides.map((guide) => (
-                <li>{guide.title}</li>))}
+                <li><Link to={`/guides/${guide.slug}`} className="guide-card-link">
+                  {guide.title}</Link></li>))}
             </ul>
           </div>
 
