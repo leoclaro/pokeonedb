@@ -78,7 +78,6 @@ function ItemSales() {
         width: 130,
         renderCell: ({ row }: { row: ItemRecord }) => <>{formatPrice(row.price)}</>,
       },
-      { key: 'createdAt', name: 'Criado em', sortable: true, resizable: true, width: 180 },
     ],
     []
   )
