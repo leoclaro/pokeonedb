@@ -57,7 +57,7 @@ function HomePage({ latestHistory }: HomePageProps) {
 
       <section className="home-content-grid">
         <div className="home-main-column">
-          <h3 className="home-section-title">ÚLTIMOS POKEMONS/ITENS ADICIONADOS PARA VENDAS</h3>
+          <h3 className="home-section-title">HISTÓRICO DE VENDAS (ÚLTIMOS 4)</h3>
           <div className="home-news-list">
             {latestHistory.length > 0 ? (
               latestHistory.map((item) => (

@@ -28,7 +28,7 @@ function App() {
     const historyQuery = query(
       collection(db, 'salesHistory'),
       orderBy('timestamp', 'desc'),
-      limit(10)
+      limit(4)
     )
 
     const unsubscribe = onSnapshot(historyQuery, (snapshot) => {
