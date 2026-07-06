@@ -80,10 +80,15 @@ function HomePage({ latestHistory }: HomePageProps) {
         <aside className="home-side-column" style={{ display: 'block' }}>
 
           <div className="home-side-block"  style={{ marginBottom: '16px' }}>
+            <h3 className="home-section-title">QUEM SOU</h3>
+            <p>Sou somente mais um grande fan desse desse projeto, entrem em contato para negociações das minhas vendas.<br /><br />Nick: <b>LeleoBR</b><br />Discord: <a href="discord://discord.com/users/leleonorris" target="_blank" rel="noopener noreferrer">leleonorris</a></p>
+          </div>
+
+          <div className="home-side-block"  style={{ marginBottom: '16px' }}>
             <h3 className="home-section-title">RANDOM GUIDES</h3>
             <ul>
               {guides.map((guide) => (
-                <li><Link to={`/guides/${guide.slug}`} className="guide-card-link">
+                <li key={guide.slug}><Link to={`/guides/${guide.slug}`} className="guide-card-link">
                   {guide.title}</Link></li>))}
             </ul>
           </div>
