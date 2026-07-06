@@ -108,6 +108,8 @@ function ItemSales() {
       <div className="sales-grid" style={{ padding: '1em' }}>
         <SalesDataGrid rows={rowData} columns={columns} rowKeyGetter={rowKeyGetter} />
       </div>
+
+      <p>Meu nick ingame é <b>LeleoBR</b> e Discord: <a href="discord://discord.com/users/leleonorris" target="_blank" rel="noopener noreferrer">leleonorris</a>, para quem quiser realizar negociações dos meus itens e pokémons que estão a venda.</p>
     </section>
   )
 }

@@ -130,7 +130,7 @@ function PokemonSales() {
       <div className="sales-header">
         <div>
           <p className="eyebrow">VENDAS DE POKÉMONS</p>
-          <h2>Minhas vendas de Pokémons listadas com React Data Grid</h2>
+          <h2>Minhas vendas de Pokémons listadas</h2>
         </div>
       </div>
       {error ? (
@@ -150,6 +150,7 @@ function PokemonSales() {
           rowClass={rowClass}
         />
       </div>
+      <p>Meu nick ingame é <b>LeleoBR</b> e Discord: <a href="discord://discord.com/users/leleonorris" target="_blank" rel="noopener noreferrer">leleonorris</a>, para quem quiser realizar negociações dos meus itens e pokémons que estão a venda.</p>
     </section>
   )
 }
