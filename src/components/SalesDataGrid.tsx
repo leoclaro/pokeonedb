@@ -26,7 +26,7 @@ function SalesDataGrid<T, K extends React.Key = string>({
       selectedRows={selectedRows as any}
       onSelectedRowsChange={onSelectedRowsChange as any}
       defaultColumnOptions={{ resizable: true, sortable: true }}
-      style={{ minHeight: 400 }}
+      style={{ minHeight: 600 }}
     />
   )
 }
