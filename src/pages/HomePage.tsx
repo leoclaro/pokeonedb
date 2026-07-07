@@ -81,7 +81,7 @@ function HomePage({ latestHistory }: HomePageProps) {
 
           <div className="home-side-block"  style={{ marginBottom: '16px' }}>
             <h3 className="home-section-title">QUEM SOU</h3>
-            <p>Sou somente mais um grande fan desse desse projeto, entrem em contato para negociações das minhas vendas.<br /><br />Nick: <b>LeleoBR</b><br />Discord: <a href="discord://discord.com/users/leleonorris" target="_blank" rel="noopener noreferrer">leleonorris</a></p>
+            <p>Sou somente mais um grande fan desse projeto, entrem em contato para negociações das minhas vendas.<br /><br />Nick: <b>LeleoBR</b><br />Discord: <a href="discord://discord.com/users/leleonorris" target="_blank" rel="noopener noreferrer">leleonorris</a></p>
           </div>
 
           <div className="home-side-block"  style={{ marginBottom: '16px' }}>
