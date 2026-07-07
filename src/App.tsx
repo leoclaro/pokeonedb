@@ -9,6 +9,7 @@ import AdminItemSales from './pages/AdminItemSales'
 import GuidesPage from './pages/GuidesPage'
 import GuideDetail from './pages/GuideDetail'
 import LivePage from './pages/LivePage'
+import CalculadoraHiddenPowerPage from './pages/CalculadoraHiddenPowerPage'
 import HomePage from './pages/HomePage'
 import NavBar from './components/NavBar'
 import { db } from './firebase'
@@ -67,6 +68,7 @@ function App() {
         <Route path="/sales" element={<PokemonSales />} />
         <Route path="/items" element={<ItemSales />} />
         <Route path="/lives" element={<LivePage />} />
+        <Route path="/hp-calculator" element={<CalculadoraHiddenPowerPage />} />
         <Route path="/admin" element={<AdminSales />} />
         <Route path="/admin-items" element={<AdminItemSales />} />
       </Routes>

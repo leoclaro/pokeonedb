@@ -8,6 +8,7 @@ export const menuItems: MenuItem[] = [
   { label: 'Vendas de Pokemons', path: '/sales' },
   { label: 'Vendas de Itens', path: '/items' },
   { label: 'Lives', path: '/lives' },
+  { label: 'Calculadora HP', path: '/hp-calculator' },
 ]
 
 function NavBar() {
