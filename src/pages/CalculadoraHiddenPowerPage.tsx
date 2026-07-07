@@ -2,22 +2,22 @@ import { useState } from "react";
 import "./CalculadoraHiddenPowerPage.css";
 
 const TYPES = [
-  "Fighting",
-  "Flying",
-  "Poison",
-  "Ground",
-  "Rock",
-  "Bug",
-  "Ghost",
-  "Steel",
-  "Fire",
-  "Water",
-  "Grass",
-  "Electric",
-  "Psychic",
-  "Ice",
-  "Dragon",
-  "Dark",
+  "Lutador",
+  "Voador",
+  "Veneno",
+  "Terra",
+  "Pedra",
+  "Inseto",
+  "Fantasma",
+  "Aço",
+  "Fogo",
+  "Água",
+  "Grama",
+  "Elétrico",
+  "Psíquico",
+  "Gelo",
+  "Dragão",
+  "Sombrio",
 ] as const;
 
 interface IVs {
