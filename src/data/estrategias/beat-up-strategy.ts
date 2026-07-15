@@ -67,6 +67,30 @@ export const beatUpStrategy: ExpandedStrategy = {
           description: 'Se você notar que o adversário tem um Pokémon com o golpe Fake Out (como Incineroar ou Kangaskhan), eles vão tentar travar o seu Whimsicott. Nesse caso, comece o turno usando Protect com o Terrakion e Tailwind com o Whimsicott, deixando para ativar o combo de Beat Up apenas no Turno 2!'
         }
       ]
+    },
+    {
+      stepTitle: 'Outros dois Pokémon precisam cobrir as fraquezas de Whimsicott e Terrakion',
+      steps: [
+        {
+          description: 'Para fechar esse time e proteger a sua estratégia, os outros dois Pokémon precisam cobrir as fraquezas de Whimsicott e Terrakion, além de oferecer um plano alternativo caso o oponente consiga parar o combo do Beat Up. \n\nOs dois melhores parceiros para essa equipe são esses abaixo'
+        },
+        {
+          title: 'O Guarda-Costas: Incineroar',
+          description: 'Incineroar é considerado o rei do formato de Duplas por causa da sua utilidade absurda. Ele entra em campo para enfraquecer os oponentes e garantir que o Terrakion ataque em segurança.\n- Habilidade: Intimidate (Reduz o Attack de ambos os oponentes assim que entra em campo).\n- Item: Figy Berry ou Assault Vest (Para aumentar muito a sua durabilidade).\n- Nature (Natureza): Careful (+Special Defense, -Special Attack).\n- Distribuição de EVs: 244 HP / 84 Defense / 180 Special Defense (Uma build bem defensiva).\n\nAtaques (Moveset):\n- Fake Out: Golpe prioritário que faz um oponente hesitar (flinch) no primeiro turno. Perfeito para travar uma ameaça ao Terrakion.\n- U-turn ou Parting Shot: Permite causar dano (ou reduzir atributos do rival) e voltar para o banco, permitindo reativar o Intimidate mais tarde.\n- Flare Blitz: Golpe de fogo fortíssimo para derreter Pokémon do tipo Aço ou Grama.\n- Knock Off: Remove o item do oponente e causa bom dano do tipo Sombrio.'
+        },
+        {
+          title: 'O Atacante Especial e Controle: Gastrodon',
+          description: 'Terrakion sofre muito contra ataques do tipo Água (como Water Spout de Kyogre ou Scald). Gastrodon entra no time como o counter perfeito para isso, além de trazer poder ofensivo pelo lado Especial.\n- Habilidade: Storm Drain (Atrai todos os golpes do tipo Água do campo para si. Além de ficar imune a eles, Gastrodon ganha +1 de Special Attack toda vez que absorve um golpe de água).\n- Item: Leftovers (Recupera vida passivamente).\n- Nature (Natureza): Modest (+Special Attack, -Ataque Físico).\n- Distribuição de EVs: 252 HP / 124 Defense / 132 Special Attack.\n\nAtaques (Moveset):\n- Scald: Golpe de Água confiável com 30% de chance de queimar o oponente (reduzindo o ataque físico dele pela metade).\n- Earth Power: Golpe forte do tipo Terra para cobertura contra Pokémon de Aço, Fogo e Veneno.\n- Recover: Recupera 50% da vida máxima instantaneamente, tornando Gastrodon muito difícil de nocautear.\n- Ice Beam ou Protect: Ice Beam ajuda a derrubar Pokémon do tipo Dragão e Voadores (como Salamence e Landorus).'
+        }
+      ]
+    },
+    {
+      stepTitle: 'Como a equipe joga junta',
+      steps: [ 
+        {
+          description: '- Estratégia Principal: Whimsicott + Terrakion na frente para tentar o nocaute rápido com Beat Up + Rock Slide.\n- Plano de Fundo: Se o oponente tiver golpes de Água perigosos, você deixa Gastrodon no banco. No momento em que o rival tentar surfar ou atacar o Terrakion com água, você substitui o Whimsicott pelo Gastrodon, anulando o ataque inimigo e bufando o seu sapo de graça.\n- Controle de Campo: Incineroar entra para travar inimigos perigosos com Fake Out e resetar o clima ou habilidades defensivas deles.'
+        } 
+      ]
     }
   ],
   tips: [],
