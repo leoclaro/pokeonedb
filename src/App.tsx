@@ -8,6 +8,8 @@ import AdminSales from './pages/AdminSales'
 import AdminItemSales from './pages/AdminItemSales'
 import GuidesPage from './pages/GuidesPage'
 import GuideDetail from './pages/GuideDetail'
+import StrategiesPage from './pages/StrategiesPage'
+import StrategyDetail from './pages/StrategyDetail'
 import LivePage from './pages/LivePage'
 import CalculadoraHiddenPowerPage from './pages/CalculadoraHiddenPowerPage'
 import HomePage from './pages/HomePage'
@@ -65,6 +67,8 @@ function App() {
         <Route path="/" element={<HomePage latestHistory={latestHistory} />} />
         <Route path="/guides" element={<GuidesPage />} />
         <Route path="/guides/:slug" element={<GuideDetail />} />
+        <Route path="/strategies" element={<StrategiesPage />} />
+        <Route path="/strategies/:slug" element={<StrategyDetail />} />
         <Route path="/sales" element={<PokemonSales />} />
         <Route path="/items" element={<ItemSales />} />
         <Route path="/lives" element={<LivePage />} />

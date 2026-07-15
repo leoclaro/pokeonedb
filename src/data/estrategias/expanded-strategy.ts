@@ -1,16 +1,16 @@
 export interface Step{
   stepTitle: string,
-  steps: GuideStep[]
+  steps: StrategyStep[]
 }
 
-export interface GuideStep {
+export interface StrategyStep {
   title?: string
   description: string
   image?: string | string[],
   imageWidthNatural?: boolean
 }
 
-export interface ExpandedGuide {
+export interface ExpandedStrategy {
   slug: string
   title: string
   subtitle: string

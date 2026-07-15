@@ -52,7 +52,7 @@ export default function GuideDetail() {
               <h3>{step.stepTitle}</h3>
               {step.steps.map((stepGuide, indexGuide) => (
                 <div key={indexGuide} className="step-item">
-                  <h4>{stepGuide.title}</h4>
+                  {stepGuide.title != null && <h4>{stepGuide.title}</h4>}
                   <p>{stepGuide.description}</p>
                   {stepGuide.image && (
                     Array.isArray(stepGuide.image) ? (

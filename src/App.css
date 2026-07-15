@@ -253,9 +253,9 @@
   box-shadow: 0 28px 60px rgba(0, 0, 0, 0.35);
 }
 
-.guide-gallery,
-.guide-detail-page,
-.live-page, .guides-page, .calculadora-hidden-power-page {
+.guide-gallery, .strategy-gallery,
+.guide-detail-page, .strategy-detail-page,
+.live-page, .guides-page, .strategies-page, .calculadora-hidden-power-page {
   padding: 32px 0;
 }
 
@@ -274,13 +274,13 @@
   line-height: 1.75;
 }
 
-.guide-gallery {
+.guide-gallery, .strategy-gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 20px;
 }
 
-.guide-card {
+.guide-card, .strategy-card {
   display: grid;
   border-radius: 20px;
   overflow: hidden;
@@ -289,35 +289,35 @@
   transition: transform 0.25s ease, border-color 0.25s ease;
 }
 
-.guide-card:hover {
+.guide-card:hover, .strategy-card:hover {
   transform: translateY(-4px);
   border-color: rgba(245, 158, 11, 0.35);
 }
 
-.guide-card img {
+.guide-card img, .strategy-card img {
   width: 100%;
   min-height: 180px;
   object-fit: cover;
 }
 
-.guide-card-copy {
+.guide-card-copy, .strategy-card-copy {
   padding: 18px 20px;
   display: grid;
   gap: 10px;
 }
 
-.guide-card-link {
+.guide-card-link, .strategy-card-link {
   color: inherit;
   text-decoration: none;
 }
 
-.guide-card h3 {
+.guide-card h3, .strategy-card h3 {
   margin: 0;
   font-size: 1.15rem;
   color: #fff7ed;
 }
 
-.guide-card p {
+.guide-card p, .strategy-card p {
   margin: 0;
   color: #d1d5db;
 }

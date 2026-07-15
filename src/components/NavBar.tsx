@@ -5,6 +5,7 @@ import type { MenuItem } from '../types'
 export const menuItems: MenuItem[] = [
   { label: 'Principal', path: '/' },
   { label: 'Guias', path: '/guides' },
+  { label: 'Estratégias', path: '/strategies' },
   { label: 'Vendas de Pokemons', path: '/sales' },
   { label: 'Vendas de Itens', path: '/items' },  
   { label: 'Calculadora HP', path: '/hp-calculator' },
