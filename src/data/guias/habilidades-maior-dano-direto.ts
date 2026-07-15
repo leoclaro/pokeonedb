@@ -77,7 +77,7 @@ export const habilidadesMaiorDanoDiretoGuide: ExpandedGuide = {
             },
             {
                 title: 'Iron Fist',
-                description: 'Aumentam o dano de categorias de movimentos. Iron Fist aumenta socos em 1.2x. Exemplos: Hitmonchan , Ledian, Infernape, Golurk, e Pangoro.',
+                description: 'Aumentam o dano de categorias de movimentos. Iron Fist aumenta socos em 1.2x. Exemplos: Hitmonchan, Ledian, Infernape, Golurk, e Pangoro.',
             },
             {
                 title: 'Technician (Técnico)',
@@ -110,7 +110,7 @@ export const habilidadesMaiorDanoDiretoGuide: ExpandedGuide = {
             },
             {
                 title:'Sand Rush / Slush Rush / Swift Swim',
-                description:'Não aumentam o dano diretamente, mas dobram a Speed (Velocidade) no clima certo. Isso permite que golpes baseados em velocidade (como Electro Ball) causem muito mais dano.'
+                description:'Não aumentam o dano diretamente, mas dobram a Speed (Velocidade) no clima certo. Isso permite que golpes baseados em velocidade (como Electro Ball) causem muito mais dano. Exemplos: Sandslash, Kingdra, Omastar, Kabutops (Swift Swim), Sandslash de Alola (Slush Rush), Stoutland, e Excadrill (Sand Rush)'
             }
         ]
     },
@@ -131,7 +131,7 @@ export const habilidadesMaiorDanoDiretoGuide: ExpandedGuide = {
             },
             {
                 title: 'Rattled / Justified',
-                description: 'Aumentam o Attack físico ou a velocidade quando o Pokémon é atingido por tipos específicos de golpes (como Sombrio ou Inseto)'
+                description: 'Aumentam o Attack físico ou a velocidade quando o Pokémon é atingido por tipos específicos de golpes (como Sombrio ou Inseto). Exemplos: Arcanine (Justified), Lucario (Justified), Gallade (Justified), Cobalion (Justified), Terrakion (Justified), Virizion (Justified), Magikarp (Rattled), Sudowoodo (Rattled), Granbull (Rattled), Dunsparce (Rattled), Clamperl (Rattled), Whismur (Rattled), e Cubchoo (Rattled).'
             },
             {
                 title: 'Competitive / Defiant',
@@ -148,15 +148,15 @@ export const habilidadesMaiorDanoDiretoGuide: ExpandedGuide = {
             },
             {
                 title: 'Unaware',
-                description: 'Ignora completamente qualquer aumento de defesa ou defesa especial que o Pokémon adversário tenha acumulado.'
+                description: 'Ignora completamente qualquer aumento de defesa ou defesa especial que o Pokémon adversário tenha acumulado. Exemplos: Clefable, Quagsire, e Pyukumuku.'
             },
             {
                 title: 'Infiltrator',
-                description: 'Ignora barreiras defensivas do oponente, como Reflect, Light Screen, Aurora Veil e Substitute, causando dano direto.'
+                description: 'Ignora barreiras defensivas do oponente, como Reflect, Light Screen, Aurora Veil e Substitute, causando dano direto. Exemplos: Crobat, Chandelure, e Noivern.'
             },
             {
                 title: 'Sniper',
-                description: 'Aumenta o dano de golpes críticos. Normalmente, um golpe crítico causa 1.5x de dano; com Sniper, ele passa a causar 2.25x de dano. Exemplos: Kingdra, Drapion, e Beedrill.'
+                description: 'Aumenta o dano de golpes críticos. Normalmente, um golpe crítico causa 1.5x de dano; com Sniper, ele passa a causar 2.25x de dano. Exemplos: Kingdra, Drapion, Octillery, e Beedrill.'
             },
         ]
     },
@@ -169,7 +169,59 @@ export const habilidadesMaiorDanoDiretoGuide: ExpandedGuide = {
             },
             {
                 title: 'Overgrow / Blaze / Torrent / Swarm',
-                description: 'Aumentam o poder de golpes do tipo Grama, Fogo, Água e Inseto em 1.5x se a vida do Pokémon cair para menos de 33%. Exemplos: Venusaur, Charizard, Blastoise, Decidueye, Incineroar, e Primarina.'
+                description: 'Aumentam o poder de golpes do tipo Grama, Fogo, Água e Inseto em 1.5x se a vida do Pokémon cair para menos de 33%. Exemplos: Venusaur, Charizard, Blastoise, Decidueye, Incineroar, Primarina, Beedrill, Scyther, Heracross, e Volcarona.'
+            },
+        ]
+    },
+    {
+        stepTitle: 'Habilidades Baseadas em Itens',
+        steps: [ 
+            {
+                title: 'Unburden',
+                description: 'Dobra a velocidade do Pokémon permanentemente assim que ele consome ou perde o item que estava segurando. Exemplos: Sceptile, Mega Sceptile, Drifblim, e Hawlucha'
+            },
+            {
+                title: 'Flare Boost / Toxic Boost',
+                description: 'Aumentam o Special Attack (Flare) ou Attack físico (Toxic) em 1.5x se o Pokémon estiver queimado ou envenenado. Diferente de Guts, elas só funcionam especificamente com o status correto. Exemplos: Drifblim (Flare Boost), e Zangoose (Toxic Boost)'
+            }
+        ]
+    },
+    {
+        stepTitle: 'Amplificadores de Tipos Específicos (Multiplicador de 1.3x a 1.5x)',
+        steps: [ 
+            {
+                title: 'Dark Aura / Fairy Aura',
+                description: 'Aumentam o poder de todos os movimentos do tipo Sombrio ou Fada em campo em 1.33x (afeta aliados e inimigos também). Exemplos: Yveltal (Dark Aura), e Xerneas (Fairy Aura)'
+            },
+            {
+                title: 'Steelworker',
+                description: 'Aumenta o poder dos movimentos do tipo Aço em 1.5x (funciona exatamente como um terceiro STAB para o Pokémon). Exemplo: Dhelmise.'
+            }
+        ]
+    },
+    {
+        stepTitle: 'Habilidades que Mudam com o Alvo (Multiplicador de 1.25x a 1.5x)',
+        steps: [ 
+            {
+                title: 'Rivalry',
+                description: 'Aumenta o dano em 1.25x se o oponente for do mesmo gênero que o seu Pokémon (mas reduz em 0.75x se for do gênero oposto). Exemplos: Nidoqueen, Nidoking, Luxray, e Haxorus.'
+            },
+            {
+                title: 'Merciless',
+                description: 'Garante que todos os ataques do Pokémon sejam golpes críticos (1.5x de dano) se o oponente estiver envenenado. Exemplos: Mareanie, e Toxapex'
+            },
+            {
+                title: 'Analytic',
+                description: 'Aumenta o poder do ataque em 1.3x se o seu Pokémon for o último a se mover no turno. Exemplos: Starmie, Porygon-Z, e Magnezone'
+            }
+        ]
+    },
+    {
+        stepTitle: 'Multiplicadores de Risco-Recompensa',
+        steps: [ 
+            {
+                title: 'Reckless',
+                description: 'Aumenta em 1.2x o poder de golpes que causam dano de recuo (recoil) no próprio usuário (como Double-Edge ou Brave Bird). Exemplos: Staraptor, Emboar, e Mienshao.'
             },
         ]
     }
