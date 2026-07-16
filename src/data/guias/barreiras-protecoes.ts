@@ -1,5 +1,5 @@
 import type { ExpandedGuide } from './expanded-guide'
-import imgBarreirasEProtecoes from '/src/assets/guides/barreiras-protecoes/barreiras-e-protecoes.png'
+import imgBarreirasEProtecoes from '/src/assets/guides/barreiras-protecoes/barreiras-e-protecoes.fw.png'
 
 export const barreirasProtecoesGuide: ExpandedGuide = {
   slug: 'barreiras-e-protecoes',
