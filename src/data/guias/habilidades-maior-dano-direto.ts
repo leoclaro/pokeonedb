@@ -1,4 +1,5 @@
 import type { ExpandedGuide } from './expanded-guide'
+import imgHabilidadesMaiorDanoDireto from '/src/assets/guides/habilidades-maior-dano-direto/habilidades-maior-dano-direto.png'
 
 export const habilidadesMaiorDanoDiretoGuide: ExpandedGuide = {
   slug: 'habilidades-maior-dano-direto',
@@ -6,8 +7,8 @@ export const habilidadesMaiorDanoDiretoGuide: ExpandedGuide = {
   subtitle: 'Habilidades que fazem um Pokémon causar o maior dano direto',
   description:
     'Pequeno guia explicativo sobre algumas habilidades que fazem um pokémon virar uma maquina de matar!',
-  summary: '',
-  image: '',
+  summary: 'Imagem ilustrando sobre abilidades que aumentam o dano direto de um pokémon.',
+  image: imgHabilidadesMaiorDanoDireto,
   topics: [],
   steps: [
     {
