@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import { getStrategyBySlug } from '../data/strategies'
 import React from 'react'
+import ReactMarkdown from 'react-markdown'
 
 export default function StrategyDetail() {
   const { slug } = useParams<{ slug: string }>()
@@ -53,7 +54,31 @@ export default function StrategyDetail() {
               {step.steps.map((stepStrategy, indexStrategy) => (
                 <div key={indexStrategy} className="step-item">
                   {stepStrategy.title != null && <h4>{stepStrategy.title}</h4>}
-                  <p>{stepStrategy.description}</p>
+                  
+                  <p>
+                    <ReactMarkdown
+                      children={stepStrategy.description}
+                      components={{
+                        img: ({ node, ...props }) => (
+                          <img
+                            {...props}
+                            
+                            width="24"
+                            height="24"
+                            style={{ 
+                              width: '24px',
+                              height: '24px',
+                              verticalAlign: 'middle', 
+                              display: 'inline-block', 
+                              margin: '0 4px' 
+                            }}
+                            loading="lazy"
+                          />
+                        )
+                      }}
+                    />
+                  </p>
+
                   {stepStrategy.image && (
                     Array.isArray(stepStrategy.image) ? (
                       stepStrategy.image.map((img, imgIndex) => (

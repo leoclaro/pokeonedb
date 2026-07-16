@@ -35,7 +35,7 @@ export const sistemaPontuacaoGuide: ExpandedGuide = {
       steps: [
         {
           title: '',
-          description: 'Para ganhar pontos, você precisa completar tarefas diárias específicas em cada região, como fazer os boss diarios, e as missões da Officer Jenny. Cada tarefa concluída concede uma quantidade determinada de pontos, que são acumulados ao longo do tempo.\n\nLembrando que você pode obter até 20 pontos ao dia, 100 pontos por semana, e 300 pontos por mês por região.',
+          description: 'Para ganhar pontos, você precisa completar tarefas diárias específicas em cada região, como fazer os boss diarios, e as missões da Officer Jenny. Cada tarefa concluída concede uma quantidade determinada de pontos, que são acumulados ao longo do tempo.\n\n\u00a0\n\nLembrando que você pode obter até 20 pontos ao dia, 100 pontos por semana, e 300 pontos por mês por região.',
           image: ''
         },
       ]
@@ -78,7 +78,7 @@ export const sistemaPontuacaoGuide: ExpandedGuide = {
       stepTitle: "Atenção",
       steps: [{
         title:'',
-        description: 'Se você realizou qualquer doação de pacote ao servidor, poderá resgatar 1 shiny pokemon depois de completar os 300 pontos no NPC perto dos trofeus na sala de resgate.\n\nCaso não tenha feito doação, podera assim mesmo pegar 1 pokemon (não shiny) por região',
+        description: 'Se você realizou qualquer doação de pacote ao servidor, poderá resgatar 1 shiny pokemon depois de completar os 300 pontos no NPC perto dos trofeus na sala de resgate.\n\n\u00a0\n\nCaso não tenha feito doação, podera assim mesmo pegar 1 pokemon (não shiny) por região',
         image: imgUnovaRewardPokemon
       }]
     }

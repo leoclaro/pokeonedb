@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import { getGuideBySlug } from '../data/guides'
 import React from 'react'
+import ReactMarkdown from 'react-markdown'
 
 export default function GuideDetail() {
   const { slug } = useParams<{ slug: string }>()
@@ -53,7 +54,32 @@ export default function GuideDetail() {
               {step.steps.map((stepGuide, indexGuide) => (
                 <div key={indexGuide} className="step-item">
                   {stepGuide.title != null && <h4>{stepGuide.title}</h4>}
-                  <p>{stepGuide.description}</p>
+                  
+                  {/* 2. Alteração aqui: Agora a descrição renderiza Markdown e imagens em linha */}
+                  <p>
+                    <ReactMarkdown
+                      children={stepGuide.description}
+                      components={{
+                        img: ({ node, ...props }) => (
+                          <img
+                            {...props}
+                            
+                            width="24"
+                            height="24"
+                            style={{ 
+                              width: '24px',
+                              height: '24px',
+                              verticalAlign: 'middle', 
+                              display: 'inline-block', 
+                              margin: '0 4px' 
+                            }}
+                            loading="lazy"
+                          />
+                        )
+                      }}
+                    />
+                  </p>
+
                   {stepGuide.image && (
                     Array.isArray(stepGuide.image) ? (
                       stepGuide.image.map((img, imgIndex) => (
