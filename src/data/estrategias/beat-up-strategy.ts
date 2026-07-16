@@ -1,4 +1,5 @@
 import type { ExpandedStrategy } from './expanded-strategy'
+import imgBeatUpStrategy from '/src/assets/strategies/beat-up-strategy/beat-up-strategy.png'
 
 export const beatUpStrategy: ExpandedStrategy = {
   slug: 'beat-up-strategy',
@@ -6,8 +7,8 @@ export const beatUpStrategy: ExpandedStrategy = {
   subtitle: 'Combo utilizando Lucario ou Terrakion com Beat Up para alcançar o dano máximo em um único turno',
   description:
     'Nesse pequeno guia estrategia, vamos aprender a utilizar o combo com o move Beat UP para alcançar o dano máximo em um único turno!',
-  summary: '',
-  image: '',
+  summary: 'Imagem ilustrando sobre a estratégia de Beat Up com Lucario ou Terrakion.',
+  image: imgBeatUpStrategy,
   topics: [],
   steps: [
     {
