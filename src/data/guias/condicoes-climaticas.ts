@@ -1,4 +1,5 @@
 import type { ExpandedGuide } from './expanded-guide'
+import imgCondicoesClimaticas from '/src/assets/guides/condicoes-climaticas/condicoes-climaticas.png'
 
 export const condicoesClimaticasETerrenosGuide: ExpandedGuide = {
   slug: 'condicoes-climaticas-e-terrenos',
@@ -6,8 +7,8 @@ export const condicoesClimaticasETerrenosGuide: ExpandedGuide = {
   subtitle: 'Quais abilitys e moves são relacionados ao clima/terreno e como são afetados',
   description:
     'Pequeno guia explicativo sobre como chamar o clima/terreno e utiliza-lo ao seu favor.',
-  summary: '',
-  image: '',
+  summary: 'Imagem ilustrando algumas condições sobre determinados terrenos e climas.',
+  image: imgCondicoesClimaticas,
   topics: ['Explicação clara de cada clima', 'Explicação clara de cada terreno'],
   steps: [
     {
