@@ -5,7 +5,7 @@ import { itemSalesGuide } from './item-sales'
 import { fabricarPokebolasEspeciaisGuide } from './fabricar-pokebolas-especiais'
 import { barreirasProtecoesGuide } from './barreiras-protecoes'
 import { habilidadesMaiorDanoDiretoGuide } from './habilidades-maior-dano-direto'
-import { condicoesClimaticasGuide } from './condicoes-climaticas'
+import { condicoesClimaticasETerrenosGuide } from './condicoes-climaticas'
 
 export type { ExpandedGuide, GuideStep }
 
@@ -16,7 +16,7 @@ export const guides: ExpandedGuide[] = [
   fabricarPokebolasEspeciaisGuide,
   barreirasProtecoesGuide,
   habilidadesMaiorDanoDiretoGuide,
-  condicoesClimaticasGuide,
+  condicoesClimaticasETerrenosGuide,
 ]
 
 export function getGuideBySlug(slug: string) {
