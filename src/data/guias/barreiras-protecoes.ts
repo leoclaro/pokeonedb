@@ -1,4 +1,5 @@
 import type { ExpandedGuide } from './expanded-guide'
+import imgBarreirasEProtecoes from '/src/assets/guides/barreiras-protecoes/barreiras-e-protecoes.png'
 
 export const barreirasProtecoesGuide: ExpandedGuide = {
   slug: 'barreiras-e-protecoes',
@@ -6,8 +7,8 @@ export const barreirasProtecoesGuide: ExpandedGuide = {
   subtitle: 'Quais as barreiras e proteções existentes',
   description:
     'Pequeno guia explicativo sobre barreiras e proteções existentes no pokemon.',
-  summary: '',
-  image: '',
+  summary: 'Imagem ilustrando como funciona as habilidades de barreira e proteções',
+  image: imgBarreirasEProtecoes,
   topics: ['🛡️ Barreiras', '⚔️ Ataques que penetram / ignoram'],
   steps: [
     {
