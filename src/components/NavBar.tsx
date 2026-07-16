@@ -8,7 +8,7 @@ export const menuItems: MenuItem[] = [
   { label: 'Estratégias', path: '/strategies' },
   { label: 'Vendas de Pokemons', path: '/sales' },
   { label: 'Vendas de Itens', path: '/items' },  
-  { label: 'Calculadora HP', path: '/hp-calculator' },
+  { label: 'Calc Hidden Power', path: '/hp-calculator' },
   { label: 'Lives', path: '/lives' },
 ]
 
