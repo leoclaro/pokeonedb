@@ -74,6 +74,15 @@ export default function StrategyDetail() {
                             }}
                             loading="lazy"
                           />
+                        ),
+                        ul: ({node, ...props}) => (
+                          <ul 
+                            {...props} 
+                            style={{
+                              marginTop: '0px',
+                              marginBottom: '0px'
+                            }}
+                          />
                         )
                       }}
                     />

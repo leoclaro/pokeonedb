@@ -20,7 +20,7 @@ export const beatUpStrategy: ExpandedStrategy = {
         },
         {
           title: 'O Ativador (Pokémon Rápido)',
-          description: 'Você precisa de um Pokémon que seja extremamente rápido e que aprenda Beat Up, de preferência com um status de Attack baixo para não machucar muito o seu próprio aliado.\n- Whimsicott: é a melhor escolha. Ele tem a habilidade Prankster, que faz o golpe Beat Up ter prioridade (+1) e atacar antes de qualquer oponente.\n- Weavile ou Dugtrio de Alola: também funcionam por causa da velocidade natural altíssima deles.',
+          description: 'Você precisa de um Pokémon que seja extremamente rápido e que aprenda Beat Up, de preferência com um status de Attack baixo para não machucar muito o seu próprio aliado.\n- **Whimsicott**: é a melhor escolha. Ele tem a habilidade Prankster, que faz o golpe Beat Up ter prioridade (+1) e atacar antes de qualquer oponente.\n- **Weavile** ou Dugtrio de Alola: também funcionam por causa da velocidade natural altíssima deles.',
         },        
         {
           title: 'O Atacante (O Usuário de Justified)',
@@ -33,7 +33,7 @@ export const beatUpStrategy: ExpandedStrategy = {
       steps:[
         {
           title: 'O Passo a Passo no Turno 1',
-          description: '1 - Abertura: Você entra em campo com Whimsicott e Terrakion lado a lado.\n\n\u00a0\n\n2 - O Ataque Aliado: Whimsicott usa Beat Up focado no seu próprio Terrakion.\n\n\u00a0\n\n3 - A Ativação: O golpe vai acertar Terrakion 4 vezes, causando um dano mínimo (já que o ataque do Whimsicott é fraco). A cada hit, a habilidade Justified é ativada.\n\n\u00a0\n\n4 - Resultado: O Attack de Terrakion sobe para +4 estágios em menos de dois segundos.\n\n\u00a0\n\n5 - A Destruição: No mesmo turno, Terrakion (que também é muito rápido) usa um golpe em área como Rock Slide (Deslizamento de Rocha). Com o bônus de 3x de dano, ele tem grandes chances de nocautear os dois Pokémon adversários de uma só vez.'
+          description: '\u00a0\u00a0\u00a0\u00a01 - Abertura: Você entra em campo com Whimsicott e Terrakion lado a lado.\n\n\u00a0\n\n\u00a0\u00a0\u00a0\u00a02 - O Ataque Aliado: Whimsicott usa Beat Up focado no seu próprio Terrakion.\n\n\u00a0\n\n\u00a0\u00a0\u00a0\u00a03 - A Ativação: O golpe vai acertar Terrakion 4 vezes, causando um dano mínimo (já que o ataque do Whimsicott é fraco). A cada hit, a habilidade Justified é ativada.\n\n\u00a0\n\n\u00a0\u00a0\u00a0\u00a04 - Resultado: O Attack de Terrakion sobe para +4 estágios em menos de dois segundos.\n\n\u00a0\n\n\u00a0\u00a0\u00a0\u00a05 - A Destruição: No mesmo turno, Terrakion (que também é muito rápido) usa um golpe em área como Rock Slide (Deslizamento de Rocha). Com o bônus de 3x de dano, ele tem grandes chances de nocautear os dois Pokémon adversários de uma só vez.'
         }
       ]
     },
