@@ -3,12 +3,24 @@ import type { HistoryRecord } from '../types'
 import { menuItems } from '../components/NavBar'
 import './HomePage.css'
 import { guides } from '../data/guides'
+import { strategies } from '../data/estrategias'
 
 interface HomePageProps {
   latestHistory: HistoryRecord[]
 }
 
 function HomePage({ latestHistory }: HomePageProps) {
+  // 1. Padroniza e combina as duas listas adicionando o tipo de cada item
+  const combinedItems = [
+    ...guides.map(g => ({ ...g, type: 'guide' })),
+    ...strategies.map(s => ({ ...s, type: 'strategy' }))
+  ];
+
+  // 2. Embaralha a lista e seleciona apenas 10 itens aleatórios
+  const randomItems = [...combinedItems]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 10);
+
   return (
     <>
       <section className="home-hero-section">
@@ -85,11 +97,22 @@ function HomePage({ latestHistory }: HomePageProps) {
           </div>
 
           <div className="home-side-block"  style={{ marginBottom: '16px' }}>
-            <h3 className="home-section-title">RANDOM GUIDES</h3>
+            <h3 className="home-section-title">RANDOM GUIDES & STRATEGIES</h3>
             <ul>
-              {guides.map((guide) => (
-                <li key={guide.slug}><Link to={`/guides/${guide.slug}`} className="guide-card-link">
-                  {guide.title}</Link></li>))}
+              {/* Renderiza a lista embaralhada com no máximo 10 itens */}
+              {randomItems.map((item) => {
+                const routePath = item.type === 'guide' 
+                  ? `/guides/${item.slug}` 
+                  : `/strategies/${item.slug}`;
+
+                return (
+                  <li key={`${item.type}-${item.slug}`}>
+                    <Link to={routePath} className="guide-card-link">
+                      {item.title}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
