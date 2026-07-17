@@ -138,6 +138,7 @@ function HomePage({ latestHistory }: HomePageProps) {
           ))}{' '}
           •
         </p>
+        <p>Caso tenha alguma sugestão de guia, ou de algo que deveria melhorar, entrem em contato comigo. Aceito doações de pokedollars, itens, e pokemons! xD</p>
         <p>© PokeOne Database - pokeonedb.web.app</p>
       </footer>
     </>
