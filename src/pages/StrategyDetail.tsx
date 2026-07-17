@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom'
 import { getStrategyBySlug } from '../data/strategies'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm';
 
 export default function StrategyDetail() {
   const { slug } = useParams<{ slug: string }>()
@@ -55,8 +56,8 @@ export default function StrategyDetail() {
                 <div key={indexStrategy} className="step-item">
                   {stepStrategy.title != null && <h4>{stepStrategy.title}</h4>}
                   
-                  <p>
-                    <ReactMarkdown
+                  <section>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}
                       children={stepStrategy.description}
                       components={{
                         img: ({ node, ...props }) => (
@@ -86,7 +87,7 @@ export default function StrategyDetail() {
                         )
                       }}
                     />
-                  </p>
+                  </section>
 
                   {stepStrategy.image && (
                     Array.isArray(stepStrategy.image) ? (

@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom'
 import { getGuideBySlug } from '../data/guides'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm';
 
 export default function GuideDetail() {
   const { slug } = useParams<{ slug: string }>()
@@ -56,8 +57,8 @@ export default function GuideDetail() {
                   {stepGuide.title != null && <h4>{stepGuide.title}</h4>}
                   
                   {/* 2. Alteração aqui: Agora a descrição renderiza Markdown e imagens em linha */}
-                  <p>
-                    <ReactMarkdown
+                  <section>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}
                       children={stepGuide.description}
                       components={{
                         img: ({ node, ...props }) => (
@@ -87,7 +88,7 @@ export default function GuideDetail() {
                         )
                       }}
                     />
-                  </p>
+                  </section>
 
                   {stepGuide.image && (
                     Array.isArray(stepGuide.image) ? (
