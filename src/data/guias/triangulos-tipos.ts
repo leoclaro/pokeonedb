@@ -1,4 +1,5 @@
 import type { ExpandedGuide } from './expanded-guide'
+import imgTriangulosTipos from '/src/assets/guides/triangulos-tipos/triangulos-tipos.png'
 
 export const triangulosTiposGuide: ExpandedGuide = {
   slug: 'triangulos-tipos',
@@ -7,8 +8,8 @@ export const triangulosTiposGuide: ExpandedGuide = {
   description:
     'Este guia analisa a mecânica dos triângulos de tipos — trios de tipos onde cada um é super eficaz contra o seguinte no ciclo.',
   summary:
-    'Irei listar os locais de venda, e quais itens conseguirá vender nesses locais.',  
-  image: '',
+    'Imagem ilustrativa de alguns triângulos de tipos.',  
+  image: imgTriangulosTipos,
   topics: ['Triângulos Perfeitos', 'Triângulos Imperfeitos', 'Triângulos Monotipos'],
   steps: [
     {
