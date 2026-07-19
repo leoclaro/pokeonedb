@@ -8,6 +8,7 @@ import { habilidadesMaiorDanoDiretoGuide } from './habilidades-maior-dano-direto
 import { condicoesClimaticasETerrenosGuide } from './condicoes-climaticas'
 import { obterPlatesReliquiasGuide } from './obter-plates-e-reliquias'
 import { triangulosTiposGuide } from './triangulos-tipos'
+import { habilidadesComEfeitosSecretosForaBatalhaGuide } from './habilidades-com-efeitos-secretos-fora-batalha'
 
 export type { ExpandedGuide, GuideStep }
 
@@ -21,6 +22,7 @@ export const guides: ExpandedGuide[] = [
   condicoesClimaticasETerrenosGuide,
   obterPlatesReliquiasGuide,
   triangulosTiposGuide,
+  habilidadesComEfeitosSecretosForaBatalhaGuide,
 ]
 
 export function getGuideBySlug(slug: string) {
