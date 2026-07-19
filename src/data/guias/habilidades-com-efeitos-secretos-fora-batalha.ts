@@ -1,4 +1,5 @@
 import type { ExpandedGuide } from './expanded-guide'
+import imgHabilidadesComEfeitosSecretosForaBatalha from '/src/assets/guides/habilidades-com-efeitos-secretos-fora-batalha/habilidades-com-efeitos-secretos-fora-batalha.png'
 
 export const habilidadesComEfeitosSecretosForaBatalhaGuide: ExpandedGuide = {
   slug: 'habilidades-com-efeitos-secretos-fora-batalha',
@@ -7,7 +8,7 @@ export const habilidadesComEfeitosSecretosForaBatalhaGuide: ExpandedGuide = {
   description:
     'Nesse guia você irá aprender sobre algumas habilidades com efeitos secretos(Field Effects) fora do campo de batalha, válidas no PokeOne.',
   summary: '',
-  image: '',
+  image: imgHabilidadesComEfeitosSecretosForaBatalha,
   topics: [],
   steps: [
     {
