@@ -5,6 +5,7 @@ import imgUnovaRouteU5Outside from '/src/assets/guides/item-sales/unova-route-u5
 import imgUnovaRouteU5Inside from '/src/assets/guides/item-sales/unova-route-u5-inside.png'
 import imgUnovaUndellaPokemonCenterBillionaireManiac from '/src/assets/guides/item-sales/unova-undella-pokemon-center-billionaire-maniac.png'
 import imgUnovaIcirrusPokemonCenterOreManiac from '/src/assets/guides/item-sales/unova-icirrus-pokemon-center-ore-maniac.png'
+import imgUnovaMiltraltonPokeCenter from '/src/assets/guides/item-sales/unova-miltralton-pokecenter.png'
 
 export const itemSalesGuide: ExpandedGuide = {
   slug: 'item-sales',
@@ -36,12 +37,18 @@ export const itemSalesGuide: ExpandedGuide = {
         },
         {
           title: 'Unova Route U5 - Entre dentro da Van para conseguir vender',
-          description: '- Balm Mushroom',
+          description: '- Berries\n- Balm Mushroom\n- Outros Mushrooms',
           imageWidthNatural: true,
           image:[        
                 imgUnovaRouteU5Outside,
                 imgUnovaRouteU5Inside
             ]
+        },
+        {
+          title: 'Unova - Mistralton City - NPC Mulch Maniac dentro do PokeCenter',
+          description: '- Damp Mulch\n- Growth Mulch\n- Stable Mulch\n- Talvez existam outros Mulchs',
+          imageWidthNatural: true,
+          image: imgUnovaMiltraltonPokeCenter
         },
         {
           title: 'Kanto - Lavender Town / Johto - Goldenrod City | Barraquinha rocha',
