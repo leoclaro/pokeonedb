@@ -26,7 +26,8 @@ export const habilidadesComEfeitosSecretosForaBatalhaGuide: ExpandedGuide = {
                 \n- **White Smoke**: reduz pela metade a chance de aparecer um Pokémon selvagem. Ex.: Torkoal, e Heatmor (h.a.).
                 \n- **Quick Feet**: reduz pela metade a chance de aparecer um Pokémon selvagem. Ex.: Jolteon, Linoone, Shroomish, e Scolipede.
                 \n- **Intimidate**: reduz a chance de encontro se o Pokémon líder tiver nível maior que os selvagens da área. Ex.: Gyarados, Granbull, Hitmontop, Mightyena, Masquerain, Mawile, Salamence, Staraptor, Luxray, Stoutland, Krookodile, Qwilfish (h.a.), e Scrafty (h.a.).
-                \n- **Sand Veil**: reduz pela metade a taxa de encontro em áreas com tempestade de areia. Ex.: Sandslash, Dugtrio, Gliscor, Cacturne, Garchomp, e Heliolisk`,
+                \n- **Sand Veil**: reduz pela metade a taxa de encontro em áreas com tempestade de areia. Ex.: Sandslash, Dugtrio, Gliscor, Cacturne, Garchomp, e Heliolisk
+                \n- **Snow Cloak**: reduz pela metade a taxa de encontro em áreas com granizo. Ex.: Swinub, Piloswine, Mamoswine, Glaceon, e Froslass.`,
             },
             {
                 title: 'Aumentam encontros de alto nível',
@@ -56,6 +57,30 @@ export const habilidadesComEfeitosSecretosForaBatalhaGuide: ExpandedGuide = {
                 title: 'Relacionadas a natureza',
                 description: `- **Synchronize**: aumenta em 50% a chance de o Pokémon selvagem encontrado ter a mesma Natureza do líder. Ex.: Alakazam, Mew, Xatu, Espeon, Umbreon, Gardevoir, Musharna, Beheeyem, e Sylveon.`,
             },
+            {
+                title: 'Flash Fire',
+                description: 'Atrai Pokémon do tipo Fogo. Ex.: Vulpix, Growlithe, Arcanine, e Ponyta.'
+            },
+            {
+                title: 'Harvest',
+                description: 'Atrai Pokémon do tipo Grama. Ex.: Exeggcute, Exeggutor, Tropius, e Trevenant.'
+            },
+            {
+                title: 'Storm Drain',
+                description: 'Atrai Pokémon do tipo Água. Ex.: Shellos, Gastrodon, Lileep, e Maractus.'
+            },
+            {
+                title: 'Static',
+                description: 'Atraem Pokémon do tipo Elétrico. Ex.: Pikachu, Raichu, Voltorb, Mareep, e Ampharos.'
+            },
+            {
+                title: 'Lightning Rod',
+                description: 'Atraem Pokémon do tipo Elétrico. Ex.: Cubone, Marowak, Rhyhorn, e Electrike.'
+            },
+            {
+                title: 'Magnet Pull',
+                description: 'Atrai Pokémon do tipo Aço. Ex.: Magnemite, Magneton, Magnezone, e Nosepass.'
+            }
         ]
     },
     {
@@ -74,7 +99,8 @@ export const habilidadesComEfeitosSecretosForaBatalhaGuide: ExpandedGuide = {
             {
                 title: 'À itens',
                 description: `- **Honey Gather**: chance de obter o item Honey após uma batalha, se o Pokémon não estiver segurando nada. Ex.: Teddiursa, Combee, e Ribombee.
-                \n- **Pickup**: chance de encontrar um item aleatório após a batalha, se o Pokémon não estiver segurando nada. Ex.: Meowth, Zigzagoon/Linoone, Aipom, Teddiursa, Phanpy, Bidoof, e Buizel.`,
+                \n- **Pickup**: chance de encontrar um item aleatório após a batalha, se o Pokémon não estiver segurando nada. Ex.: Meowth, Zigzagoon/Linoone, Aipom, Teddiursa, Phanpy, Bidoof, e Buizel.
+                \n- **Honey Getter**: chance de gerar o item Honey (Mel). A chance começa em 5% (níveis 1 a 10) e aumenta progressivamente a cada 10 níveis, chegando a 50% nos níveis 91 a 100. Ex.: Teddiursa. Acredito que essa habilidade não funciona no PokeOne.`,
             },
         ]
     },
